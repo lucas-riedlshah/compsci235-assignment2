@@ -24,13 +24,49 @@ class AbstractRepository(abc.ABC):
     def get_book(self, book_id: int) -> Book:
         """ Returns the `Book` with the given `book_id` from the repository.
 
-            If no such `Book` exist, returns None.
+            If no such `Book` exists, returns None.
         """
         raise NotImplementedError
 
     @abc.abstractmethod
     def get_all_books(self) -> List[Book]:
         """ Returns a list of all `Book`s in the repository. """
+        raise NotImplementedError
+
+    @abc.abstractmethod
+    def add_publisher(self, publisher: Publisher):
+        """ Adds a `Publisher` to the repository. """
+        raise NotImplementedError
+
+    @abc.abstractmethod
+    def get_publisher(self, name: str) -> Publisher:
+        """ Returns the `Publisher` with the given `name` from the repository.
+
+            If no such `Publisher` exists, returns None.
+        """
+        raise NotImplementedError
+
+    @abc.abstractmethod
+    def get_all_publishers(self) -> List[Publisher]:
+        """ Returns a list of all `Publisher`s. """
+        raise NotImplementedError
+
+    @abc.abstractmethod
+    def add_author(self, author: Author):
+        """ Adds a `Author` to the repository. """
+        raise NotImplementedError
+
+    @abc.abstractmethod
+    def get_author(self, unique_id: int) -> Author:
+        """ Returns the `Author` with the given `unique_id` from the repository.
+
+            If no such `Author` exists, returns None.
+        """
+        raise NotImplementedError
+
+    @abc.abstractmethod
+    def get_all_authors(self) -> List[Author]:
+        """ Returns a list of all `Author`s. """
         raise NotImplementedError
 
     @abc.abstractmethod
