@@ -36,10 +36,15 @@ class AbstractRepository(abc.ABC):
     @abc.abstractmethod
     def remove_book(self, book_id: int):
         """ Removes a `Book` from the repository. """
+    def search_books_by_title(self, title: str) -> List[Book]:
+        """ Returns a list of `Book`s who's title(s) contain the given string
+
+            If no such `Book`s exist, returns empty list.
+        """
         raise NotImplementedError
 
     @abc.abstractmethod
-    def search_books_by_author(self, author: str) -> List[Book]:
+    def search_books_by_author_name(self, author_name: str) -> List[Book]:
         """ Returns a list of `Book`s who's `Author`(s) name(s) contain the given string
 
             If no such `Book`s exist, returns empty list.
@@ -55,7 +60,7 @@ class AbstractRepository(abc.ABC):
         raise NotImplementedError
 
     @abc.abstractmethod
-    def search_books_by_publisher(self, publisher: str) -> List[Book]:
+    def search_books_by_publisher_name(self, publisher_name: str) -> List[Book]:
         """ Returns a list of `Book`s who's `Publisher` name contains the given string
 
             If no such `Book`s exist, returns empty list.
