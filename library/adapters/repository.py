@@ -2,6 +2,7 @@ import abc
 from typing import List
 from datetime import date
 
+from library.adapters.jsondatareader import BooksJSONReader
 from library.domain.model import Publisher, Author, Book, Review, User
 
 repo_instance = None
@@ -151,3 +152,20 @@ class AbstractRepository(abc.ABC):
             If no reviews exist, returns an empty list.
         """
         raise NotImplementedError
+
+
+def populate(path: str, repository: AbstractRepository):
+    books_file_name = 'comic_books_excerpt.json'
+    authors_file_name = 'book_authors_excerpt.json'
+    path_to_books_file = str(path / books_file_name)
+    path_to_authors_file = str(path / authors_file_name)
+    reader = BooksJSONReader(path_to_books_file, path_to_authors_file)
+
+    reader.read_json_files()
+
+    for book in reader.dataset_of_books:
+        repository.add_book(book)
+        if book.publisher.name != "N/A":
+            repository.add_publisher(book.publisher)
+        for author in book.authors:
+            repository.add_author(author)

@@ -2,7 +2,7 @@ from pathlib import Path
 import pytest
 
 from library import create_app
-from library.adapters import memory_repository
+from library.adapters import repository
 from library.adapters.memory_repository import MemoryRepository
 from library.adapters.jsondatareader import BooksJSONReader
 
@@ -14,7 +14,7 @@ TEST_DATA_PATH = get_project_root() / "library" / "adapters" / "data"
 @pytest.fixture
 def in_memory_repo():
     repo = MemoryRepository()
-    memory_repository.populate(TEST_DATA_PATH, repo)
+    repository.populate(TEST_DATA_PATH, repo)
     return repo
 
 
