@@ -34,8 +34,6 @@ class AbstractRepository(abc.ABC):
         raise NotImplementedError
 
     @abc.abstractmethod
-    def remove_book(self, book_id: int):
-        """ Removes a `Book` from the repository. """
     def search_books_by_title(self, title: str) -> List[Book]:
         """ Returns a list of `Book`s who's title(s) contain the given string
 
