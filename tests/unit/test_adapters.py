@@ -44,3 +44,89 @@ class TestBooksJSONReader:
     def test_read_books_from_file_special_characters(self, read_books_and_authors):
         dataset_of_books = read_books_and_authors
         assert dataset_of_books[17].title == "續．星守犬"
+
+class TestMemoryRepository:
+    def test_add_book(self, in_memory_repo):
+        book = Book(0, 'Parry Hotter')
+        in_memory_repo.add_book(book)
+
+        assert in_memory_repo.get_book(0) is book
+
+
+    def test_get_book(self, in_memory_repo):
+        assert isinstance(in_memory_repo.get_book(11827783), Book)
+
+
+    def test_get_non_existent_book(self, in_memory_repo):
+        assert in_memory_repo.get_book(42) is None
+
+
+    def test_get_all_books(self, in_memory_repo):
+        assert isinstance(in_memory_repo.get_all_books(), list)
+        assert len(in_memory_repo.get_all_books()) > 0
+
+    def test_search_books_by_title(self, in_memory_repo):
+        assert len(in_memory_repo.search_books_by_title("")) == 0
+        assert len(in_memory_repo.search_books_by_title("vol.")) == 3
+
+
+    def test_search_books_by_author_name(self, in_memory_repo):
+        assert len(in_memory_repo.search_books_by_author_name("")) == 0
+        assert len(in_memory_repo.search_books_by_author_name("mike wol")) == 1
+
+
+    def test_search_books_by_release_year(self, in_memory_repo):
+        assert len(in_memory_repo.search_books_by_release_year(2)) == 15
+
+
+    def test_search_books_by_publisher_name(self, in_memory_repo):
+        assert len(in_memory_repo.search_books_by_publisher_name("")) == 0
+        assert len(in_memory_repo.search_books_by_publisher_name("avatar")) == 4
+
+
+    def test_get_books_by_author(self, in_memory_repo):
+        author = in_memory_repo.get_all_authors()[0]
+        assert len(in_memory_repo.get_books_by_author(author)) == 1
+
+
+    def test_get_books_by_non_existent_author(self, in_memory_repo):
+        author = Author(666, "Lucifer")
+        assert in_memory_repo.get_books_by_author(author) is None
+
+
+    def test_get_books_from_release_year(self, in_memory_repo):
+        assert len(in_memory_repo.get_books_from_release_year(2)) == 0
+        assert len(in_memory_repo.get_books_from_release_year(2012)) == 3
+
+
+    def test_get_books_by_publisher(self, in_memory_repo):
+        publisher = in_memory_repo.get_all_publishers()[0]
+        assert len(in_memory_repo.get_books_by_publisher(publisher)) == 1
+
+
+    def test_get_books_by_non_existent_publisher(self, in_memory_repo):
+        publisher = Publisher("Lucas RiedlShah Publications Inc.")
+        assert in_memory_repo.get_books_by_publisher(publisher) is None
+
+
+    def test_add_user_and_get_user(self, in_memory_repo):
+        user = User('dave', '123456789')
+        in_memory_repo.add_user(user)
+
+        assert in_memory_repo.get_user('dave') is user
+
+
+    def test_get_non_existent_user(self, in_memory_repo):
+        user = in_memory_repo.get_user('prince')
+        assert user is None
+
+
+    def test_add_review_get_book_reviews(self, in_memory_repo):
+        book = Book(0, 'Star Trek: The Next Generation')
+        review = Review(book, "Resistance is futile.", 5)
+        in_memory_repo.add_review(review)
+        assert len(in_memory_repo.get_book_reviews(book)) == 1
+
+    def test_get_non_existent_book_reviews(self, in_memory_repo):
+        book = Book(0, 'Star Trek: The Next Generation')
+        assert len(in_memory_repo.get_book_reviews(book)) == 0
