@@ -3,7 +3,7 @@ import pytest
 
 from utils import get_project_root
 
-from library.domain.model import Publisher, Author, Book, Review, User, BooksInventory
+from library.domain import Publisher, Author, Book, Review, User, BooksInventory
 from library.adapters.jsondatareader import BooksJSONReader
 
 

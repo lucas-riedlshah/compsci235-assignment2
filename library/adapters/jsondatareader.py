@@ -1,6 +1,6 @@
 import json
 
-from library.domain.model import Publisher, Author, Book
+from library.domain import Publisher, Author, Book
 
 
 class BooksJSONReader:

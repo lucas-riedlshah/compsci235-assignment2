@@ -1,7 +1,7 @@
 from bisect import insort_left
 
 from library.adapters.repository import AbstractRepository
-from library.domain.model import Book, User, Author, Publisher, Review
+from library.domain import Book, User, Author, Publisher, Review
 
 
 class MemoryRepository(AbstractRepository):

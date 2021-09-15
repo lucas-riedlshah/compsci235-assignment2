@@ -1,8 +1,8 @@
 import abc
 from datetime import date
 
-from library.adapters.jsondatareader import BooksJSONReader
-from library.domain.model import Publisher, Author, Book, Review, User
+from .jsondatareader import BooksJSONReader
+from library.domain import Publisher, Author, Book, Review, User
 
 repo_instance = None
 
