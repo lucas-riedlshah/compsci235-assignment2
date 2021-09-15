@@ -1,5 +1,4 @@
 import json
-from typing import List
 
 from library.domain.model import Publisher, Author, Book
 
@@ -12,7 +11,7 @@ class BooksJSONReader:
         self.__dataset_of_books = []
 
     @property
-    def dataset_of_books(self) -> List[Book]:
+    def dataset_of_books(self) -> list[Book]:
         return self.__dataset_of_books
 
     def read_books_file(self) -> list:

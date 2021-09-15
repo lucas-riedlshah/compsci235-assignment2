@@ -1,4 +1,3 @@
-from typing import List
 from bisect import insort_left
 
 from library.adapters.repository import AbstractRepository
@@ -20,7 +19,7 @@ class MemoryRepository(AbstractRepository):
         if book_id in self.__books:
             return self.__books[book_id]
 
-    def get_all_books(self) -> List[Book]:
+    def get_all_books(self) -> list[Book]:
         return list(self.__books.values())
 
     def add_publisher(self, publisher: Publisher):
@@ -30,7 +29,7 @@ class MemoryRepository(AbstractRepository):
         if name in self.__publishers:
             return self.__publishers[name]
 
-    def get_all_publishers(self) -> List[Publisher]:
+    def get_all_publishers(self) -> list[Publisher]:
         return list(self.__publishers.values())
 
     def add_author(self, author: Author):
@@ -40,10 +39,10 @@ class MemoryRepository(AbstractRepository):
         if unique_id in self.__authors:
             return self.__authors[unique_id]
 
-    def get_all_authors(self) -> List[Author]:
+    def get_all_authors(self) -> list[Author]:
         return list(self.__authors.values())
 
-    def search_books_by_title(self, title: str) -> List[Book]:
+    def search_books_by_title(self, title: str) -> list[Book]:
         results = []
         if title == "":
             return results
@@ -52,7 +51,7 @@ class MemoryRepository(AbstractRepository):
                 results.append(book)
         return results
 
-    def search_books_by_author_name(self, author_name: str) -> List[Book]:
+    def search_books_by_author_name(self, author_name: str) -> list[Book]:
         results = []
         if author_name == "":
             return results
@@ -62,14 +61,14 @@ class MemoryRepository(AbstractRepository):
                     results.append(book)
         return results
 
-    def search_books_by_release_year(self, release_year: int) -> List[Book]:
+    def search_books_by_release_year(self, release_year: int) -> list[Book]:
         results = []
         for book in self.__books.values():
             if str(release_year) in str(book.release_year):
                 results.append(book)
         return results
 
-    def search_books_by_publisher_name(self, publisher_name: str) -> List[Book]:
+    def search_books_by_publisher_name(self, publisher_name: str) -> list[Book]:
         results = []
         if publisher_name == "":
             return results
@@ -78,7 +77,7 @@ class MemoryRepository(AbstractRepository):
                 results.append(book)
         return results
 
-    def get_books_by_author(self, author: Author) -> List[Book]:
+    def get_books_by_author(self, author: Author) -> list[Book]:
         if author.unique_id not in self.__authors:
             return None
         results = []
@@ -87,14 +86,14 @@ class MemoryRepository(AbstractRepository):
                 results.append(book)
         return results
 
-    def get_books_from_release_year(self, release_year: int) -> List[Book]:
+    def get_books_from_release_year(self, release_year: int) -> list[Book]:
         results = []
         for book in self.__books.values():
             if release_year == book.release_year:
                 results.append(book)
         return results
 
-    def get_books_by_publisher(self, publisher: Publisher) -> List[Book]:
+    def get_books_by_publisher(self, publisher: Publisher) -> list[Book]:
         if publisher.name not in self.__publishers:
             return None
         results = []
@@ -115,7 +114,7 @@ class MemoryRepository(AbstractRepository):
             self.__reviews[review.book.book_id] = []
         self.__reviews[review.book.book_id].append(review)
 
-    def get_book_reviews(self, book: Book) -> List[Review]:
+    def get_book_reviews(self, book: Book) -> list[Review]:
         if book.book_id in self.__reviews:
             return self.__reviews[book.book_id]
         return []

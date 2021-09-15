@@ -1,5 +1,4 @@
 import abc
-from typing import List
 from datetime import date
 
 from library.adapters.jsondatareader import BooksJSONReader
@@ -30,7 +29,7 @@ class AbstractRepository(abc.ABC):
         raise NotImplementedError
 
     @abc.abstractmethod
-    def get_all_books(self) -> List[Book]:
+    def get_all_books(self) -> list[Book]:
         """ Returns a list of all `Book`s in the repository. """
         raise NotImplementedError
 
@@ -48,7 +47,7 @@ class AbstractRepository(abc.ABC):
         raise NotImplementedError
 
     @abc.abstractmethod
-    def get_all_publishers(self) -> List[Publisher]:
+    def get_all_publishers(self) -> list[Publisher]:
         """ Returns a list of all `Publisher`s. """
         raise NotImplementedError
 
@@ -66,12 +65,12 @@ class AbstractRepository(abc.ABC):
         raise NotImplementedError
 
     @abc.abstractmethod
-    def get_all_authors(self) -> List[Author]:
+    def get_all_authors(self) -> list[Author]:
         """ Returns a list of all `Author`s. """
         raise NotImplementedError
 
     @abc.abstractmethod
-    def search_books_by_title(self, title: str) -> List[Book]:
+    def search_books_by_title(self, title: str) -> list[Book]:
         """ Returns a list of `Book`s who's title(s) contain the given string
 
             If no such `Book`s exist, returns empty list.
@@ -79,7 +78,7 @@ class AbstractRepository(abc.ABC):
         raise NotImplementedError
 
     @abc.abstractmethod
-    def search_books_by_author_name(self, author_name: str) -> List[Book]:
+    def search_books_by_author_name(self, author_name: str) -> list[Book]:
         """ Returns a list of `Book`s who's `Author`(s) name(s) contain the given string
 
             If no such `Book`s exist, returns empty list.
@@ -87,7 +86,7 @@ class AbstractRepository(abc.ABC):
         raise NotImplementedError
 
     @abc.abstractmethod
-    def search_books_by_release_year(self, release_year: int) -> List[Book]:
+    def search_books_by_release_year(self, release_year: int) -> list[Book]:
         """ Returns a list of `Book`s who's `release_year` contains the given value.
 
             If no such `Book`s exist, returns empty list.
@@ -95,7 +94,7 @@ class AbstractRepository(abc.ABC):
         raise NotImplementedError
 
     @abc.abstractmethod
-    def search_books_by_publisher_name(self, publisher_name: str) -> List[Book]:
+    def search_books_by_publisher_name(self, publisher_name: str) -> list[Book]:
         """ Returns a list of `Book`s who's `Publisher` name contains the given string
 
             If no such `Book`s exist, returns empty list.
@@ -103,7 +102,7 @@ class AbstractRepository(abc.ABC):
         raise NotImplementedError
 
     @abc.abstractmethod
-    def get_books_by_author(self, author: Author) -> List[Book]:
+    def get_books_by_author(self, author: Author) -> list[Book]:
         """ Returns a list of `Book`s by the given `Author`
 
             If no such `Author` exists, returns None.
@@ -111,7 +110,7 @@ class AbstractRepository(abc.ABC):
         raise NotImplementedError
 
     @abc.abstractmethod
-    def get_books_from_release_year(self, release_year: int) -> List[Book]:
+    def get_books_from_release_year(self, release_year: int) -> list[Book]:
         """ Returns a list of `Book`s released in the given `release_year`.
             Unlike `search_books_by_release_year()`, this will only return exact matches.
 
@@ -120,7 +119,7 @@ class AbstractRepository(abc.ABC):
         raise NotImplementedError
 
     @abc.abstractmethod
-    def get_books_by_publisher(self, publisher: Publisher) -> List[Book]:
+    def get_books_by_publisher(self, publisher: Publisher) -> list[Book]:
         """ Returns a list of `Book`s from the given `Publisher`
 
             If no such `Publisher` exists, returns None.
@@ -146,7 +145,7 @@ class AbstractRepository(abc.ABC):
         raise NotImplementedError
 
     @abc.abstractmethod
-    def get_book_reviews(self, book: Book) -> List[Review]:
+    def get_book_reviews(self, book: Book) -> list[Review]:
         """ Returns a list of `Review`s of the given `Book`.
 
             If no reviews exist, returns an empty list.
