@@ -20,10 +20,13 @@ def create_some_book():
 def create_app():
     app = Flask(__name__)
 
+    # @app.route('/')
+    # def home():
+    #     some_book = create_some_book()
+    #     # Use Jinja to customize a predefined html page rendering the layout for showing a single book.
+    #     return render_template('simple_book.html', book=some_book)
     @app.route('/')
     def home():
-        some_book = create_some_book()
-        # Use Jinja to customize a predefined html page rendering the layout for showing a single book.
-        return render_template('simple_book.html', book=some_book)
+        return render_template('home/home.html')
 
     return app

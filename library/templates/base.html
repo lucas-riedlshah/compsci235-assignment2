@@ -1,0 +1,47 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- TODO: Change this to a more appropriate name -->
+    <title>Library</title>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/style.css')}}"
+    />
+  </head>
+  <body>
+    <header class="header">
+      <h1 class="header__title">The Library</h1>
+      <div class="header__nav">
+        <a class="nav__item" href="/">Home</a>
+        <a class="nav__item" href="/books">Books</a>
+        <a class="nav__item" href="/authors">Authors</a>
+        <a class="nav__item" href="/publishers">Publishers</a>
+        <!-- TODO: This should be /user if logged in. -->
+        <a class="nav__item" href="/register">Register</a>
+        <!-- TODO: This should be /logout if the user is already logged in. -->
+        <a class="nav__item" href="/login">Log In</a>
+      </div>
+      <form class="header__search" method="GET" action="search">
+        <input
+          type="text"
+          name="q"
+          title="search-box"
+          placeholder="Search"
+          class="search__input"
+        />
+        <input
+          type="submit"
+          value="&rarr;"
+          title="submit-search-button"
+          class="search__button"
+        />
+      </form>
+    </header>
+    <main class="content">{% block content %} {% endblock %}</main>
+    <footer class="footer">
+      <p>Lucas RiedlShah | CompSci 235 - Software Development Methodologies</p>
+    </footer>
+  </body>
+</html>
