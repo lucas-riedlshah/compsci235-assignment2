@@ -1,0 +1,15 @@
+<div class="page-links">
+  <a href="{{ first_page_url }}" class="page-links__item">&Larr; first</a>
+
+  <a
+    href="{{ previous_page_url }}"
+    class="page-links__item {{'page-links__item--disabled' if not previous_page_url}}"
+    >&larr; previous</a
+  >
+  <a
+    href="{{ next_page_url }}"
+    class="page-links__item {{'page-links__item--disabled' if not next_page_url}}"
+    >next &rarr;</a
+  >
+  <a href="{{ last_page_url }}" class="page-links__item">last &Rarr;</a>
+</div>
