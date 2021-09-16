@@ -21,10 +21,21 @@ class Book:
         self.__release_year = None
         self.__ebook = None
         self.__num_pages = None
+        self.__isbn = None
 
     @property
     def book_id(self) -> int:
         return self.__book_id
+
+    @property
+    def isbn(self) -> str:
+        return self.__isbn
+
+    @isbn.setter
+    def isbn(self, isbn: str):
+        if not isinstance(isbn, str):
+            raise ValueError
+        self.__isbn = isbn
 
     @property
     def title(self) -> str:

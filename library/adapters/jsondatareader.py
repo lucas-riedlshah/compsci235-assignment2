@@ -37,6 +37,7 @@ class BooksJSONReader:
 
         for book_json in books_json:
             book_instance = Book(int(book_json['book_id']), book_json['title'])
+            book_instance.isbn = book_json['isbn']
             book_instance.publisher = Publisher(book_json['publisher'])
             if book_json['publication_year'] != "":
                 book_instance.release_year = int(book_json['publication_year'])
