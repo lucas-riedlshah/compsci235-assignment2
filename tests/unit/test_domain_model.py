@@ -234,6 +234,17 @@ class TestBook:
         with pytest.raises(ValueError):
             book = Book(Publisher("DC Comics"), "Harry Potter")
 
+    def test_isbn(self):
+        book = Book(0, "Harry Potter")
+        book.isbn = "12923"
+        assert str(book) == "<Book Harry Potter, book id = 0>"
+
+        with pytest.raises(ValueError):
+            book.isbn = 12923
+
+        with pytest.raises(ValueError):
+            book.isbn = Publisher("12923")
+
     def test_sorting(self):
         book1 = Book(874658, "Harry Potter")
         book2 = Book(2675376, "Hitchhiker's Guide to the Galaxy")
