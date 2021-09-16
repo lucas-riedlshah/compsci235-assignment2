@@ -4,8 +4,6 @@ from datetime import date
 from .jsondatareader import BooksJSONReader
 from library.domain import Publisher, Author, Book, Review, User
 
-repo_instance = None
-
 
 class RepositoryException(Exception):
 
@@ -151,6 +149,9 @@ class AbstractRepository(abc.ABC):
             If no reviews exist, returns an empty list.
         """
         raise NotImplementedError
+
+
+repo_instance: AbstractRepository = None
 
 
 def populate(path: str, repository: AbstractRepository):
