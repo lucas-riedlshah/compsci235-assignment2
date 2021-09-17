@@ -29,4 +29,7 @@ def create_app(test_config = None):
         from .books import books
         app.register_blueprint(books.books_blueprint)
 
+        from .authors import authors
+        app.register_blueprint(authors.authors_blueprint)
+
     return app

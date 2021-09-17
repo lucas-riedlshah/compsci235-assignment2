@@ -1,0 +1,17 @@
+{% extends 'base.html' %} {% block content %}
+<h2>Authors</h2>
+<div>
+  {% include 'components/page_link_bar.html' %}
+  <div class="list author-list">
+    {% for author in authors %}
+    <a
+      href="{{ url_for('authors_bp.author', id=author.unique_id) }}"
+      class="list__item author-list__author"
+    >
+      <h3>{{ author.full_name }}</h3>
+    </a>
+    {% endfor %}
+  </div>
+  {% include 'components/page_link_bar.html' %}
+</div>
+{% endblock %}
