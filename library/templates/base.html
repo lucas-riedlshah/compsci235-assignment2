@@ -4,22 +4,35 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <!-- TODO: Change this to a more appropriate name -->
-    <title>The Library</title>
+    <title>The Comic Book Library</title>
     <link
       rel="stylesheet"
       href="{{ url_for('static', filename='css/style.css')}}"
     />
-    <link rel="alternate icon" href="{{ url_for('static', filename='favicon.ico')}}">
-    <link rel="icon" type="image/svg+xml" href="{{ url_for('static', filename='favicon.svg')}}">
+    <link
+      rel="alternate icon"
+      href="{{ url_for('static', filename='favicon.ico')}}"
+    />
+    <link
+      rel="icon"
+      type="image/svg+xml"
+      href="{{ url_for('static', filename='favicon.svg')}}"
+    />
   </head>
   <body>
     <header class="header">
-      <h1 class="header__title">The Library</h1>
+      <a href="{{ url_for('home_bp.home') }}" class="header__title"
+        ><h1>The Comic Book Library</h1></a
+      >
       <div class="header__nav">
-        <a class="nav__item" href="/">Home</a>
-        <a class="nav__item" href="/books">Books</a>
-        <a class="nav__item" href="/authors">Authors</a>
-        <a class="nav__item" href="/publishers">Publishers</a>
+        <a class="nav__item" href="{{ url_for('home_bp.home') }}">Home</a>
+        <a class="nav__item" href="{{ url_for('books_bp.books') }}">Books</a>
+        <a class="nav__item" href="{{ url_for('authors_bp.authors') }}"
+          >Authors</a
+        >
+        <a class="nav__item" href="{{ url_for('publishers_bp.publishers') }}"
+          >Publishers</a
+        >
         |
         <!-- TODO: This should be /user if logged in. -->
         <a class="nav__item" href="/register">Register</a>

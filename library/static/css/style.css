@@ -14,13 +14,18 @@ body {
   justify-content: space-between;
   padding: 25px;
   background-color: black;
+}
+
+.header__title {
   color: white;
+  text-decoration: none;
+  min-width: 200px;
 }
 
 .header__nav {
   display: flex;
   flex-wrap: wrap;
-  min-width: 230px;
+  min-width: 300px;
   font-size: 1.3em;
 }
 
@@ -41,7 +46,7 @@ body {
 
 .header__search > .search__input {
   height: 100%;
-  width: 300px;
+  width: max(220px, 18vw);
   margin-right: 5px;
   font-size: 2em;
   border-radius: 50px;
