@@ -67,20 +67,25 @@ class TestMemoryRepository:
 
     def test_search_books_by_title(self, in_memory_repo):
         assert len(in_memory_repo.search_books_by_title("")) == 0
+        assert len(in_memory_repo.search_books_by_title("    ")) == 0
         assert len(in_memory_repo.search_books_by_title("vol.")) == 3
 
 
     def test_search_books_by_author_name(self, in_memory_repo):
         assert len(in_memory_repo.search_books_by_author_name("")) == 0
+        assert len(in_memory_repo.search_books_by_author_name("   ")) == 0
         assert len(in_memory_repo.search_books_by_author_name("mike wol")) == 1
 
 
     def test_search_books_by_release_year(self, in_memory_repo):
-        assert len(in_memory_repo.search_books_by_release_year(2)) == 15
+        assert len(in_memory_repo.search_books_by_release_year("")) == 0
+        assert len(in_memory_repo.search_books_by_release_year("   ")) == 0
+        assert len(in_memory_repo.search_books_by_release_year("2")) == 15
 
 
     def test_search_books_by_publisher_name(self, in_memory_repo):
         assert len(in_memory_repo.search_books_by_publisher_name("")) == 0
+        assert len(in_memory_repo.search_books_by_publisher_name("   ")) == 0
         assert len(in_memory_repo.search_books_by_publisher_name("avatar")) == 4
 
 

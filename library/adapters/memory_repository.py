@@ -44,6 +44,7 @@ class MemoryRepository(AbstractRepository):
 
     def search_books_by_title(self, title: str) -> list[Book]:
         results = []
+        title = title.strip()
         if title == "":
             return results
         for book in self.__books.values():
@@ -53,6 +54,7 @@ class MemoryRepository(AbstractRepository):
 
     def search_books_by_author_name(self, author_name: str) -> list[Book]:
         results = []
+        author_name = author_name.strip()
         if author_name == "":
             return results
         for book in self.__books.values():
@@ -61,15 +63,19 @@ class MemoryRepository(AbstractRepository):
                     results.append(book)
         return results
 
-    def search_books_by_release_year(self, release_year: int) -> list[Book]:
+    def search_books_by_release_year(self, release_year: str) -> list[Book]:
         results = []
+        release_year = release_year.strip()
+        if release_year == "":
+            return results
         for book in self.__books.values():
-            if str(release_year) in str(book.release_year):
+            if release_year in str(book.release_year):
                 results.append(book)
         return results
 
     def search_books_by_publisher_name(self, publisher_name: str) -> list[Book]:
         results = []
+        publisher_name = publisher_name.strip()
         if publisher_name == "":
             return results
         for book in self.__books.values():
