@@ -2,7 +2,7 @@ from library.adapters.repository import AbstractRepository
 from library.domain import Book
 from math import ceil
 
-BOOKS_PER_PAGE = 8
+BOOKS_PER_PAGE = 10
 
 def get_book(repo: AbstractRepository):
     pass
