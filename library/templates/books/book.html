@@ -1,0 +1,29 @@
+{% extends 'base.html' %} {% block content %}
+<div class="book">
+  <div class="book__title">
+    <h2>{{ book.title }}</h2>
+    <h3>
+      by {% for author in book.authors %}
+      <a href="{{ url_for('authors_bp.author', id=author.unique_id) }}"
+        >{{author.full_name}}</a
+      >{{ ', ' if author != book.authors[-1]}} {% endfor %}
+    </h3>
+  </div>
+  <div
+    class="book__cover"
+    style="background-image: url('http://covers.openlibrary.org/b/isbn/{{ book.isbn }}.jpg'), url({{ url_for('static', filename='images/placeholder_book_cover.jpg') }})"
+  ></div>
+  <div class="book__details">
+    <p>{{ book.description }}</p>
+    {% if book.publisher.name != 'N/A' %}
+    <p>
+      Publisher:
+      <a href="{{ url_for('publishers_bp.publisher', id=book.publisher.name) }}"
+        >{{ book.publisher.name }}</a
+      >
+    </p>
+    {% endif %}
+    <p>Release Year: {{ book.release_year }}</p>
+  </div>
+</div>
+{% endblock %}

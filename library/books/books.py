@@ -1,4 +1,4 @@
-from flask import Blueprint, request, render_template, url_for
+from flask import Blueprint, request, render_template, url_for, redirect
 
 from .services import *
 from library.adapters.repository import repo_instance as repo
@@ -30,3 +30,17 @@ def books():
         previous_page_url=previous_page_url,
         last_page_url=last_page_url
     )
+
+@books_blueprint.route('/book', methods=['GET'])
+def book():
+    book_id = request.args.get('id')
+    if book_id is None:
+        return redirect(url_for('home_bp.home'))
+    try:
+        book_id = int(book_id)
+    except ValueError:
+        return redirect(url_for('home_bp.home'))
+    book = get_book(repo, book_id)
+    if book is None:
+        return redirect(url_for('home_bp.home'))
+    return render_template('books/book.html', book=book)
