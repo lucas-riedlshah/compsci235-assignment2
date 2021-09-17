@@ -4,8 +4,8 @@ from math import ceil
 
 BOOKS_PER_PAGE = 10
 
-def get_book(repo: AbstractRepository):
-    pass
+def get_book(repo: AbstractRepository, book_id: int):
+    return repo.get_book(book_id)
 
 def get_nth_books_page(repo: AbstractRepository, page: int) -> list[Book]:
     return repo.get_all_books()[page * BOOKS_PER_PAGE - BOOKS_PER_PAGE: page * BOOKS_PER_PAGE]
