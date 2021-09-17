@@ -2,7 +2,7 @@
   {% include 'components/page_link_bar.html' %}
   <div class="books-list">
     {% for book in books %}
-    <a href="/book?id={{ book.book_id }}">
+    <a href="{{ url_for('books_bp.book', id=book.book_id) }}">
       <div
         class="books-list__book"
         style="background-image: url('http://covers.openlibrary.org/b/isbn/{{ book.isbn }}.jpg'), url({{ url_for('static', filename='images/placeholder_book_cover.jpg') }})"
