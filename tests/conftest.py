@@ -8,7 +8,7 @@ from library.adapters.jsondatareader import BooksJSONReader
 
 from utils import get_project_root
 
-TEST_DATA_PATH = get_project_root() / "library" / "adapters" / "data"
+TEST_DATA_PATH = get_project_root() / "tests" / "data"
 
 
 @pytest.fixture
