@@ -58,9 +58,17 @@ class BooksJSONReader:
                 # We assume book authors are available in the authors file,
                 # otherwise more complex handling is required.
                 author_name = None
+                author_average_rating = None
+                author_ratings_count = None
                 for author_json in authors_json:
                     if int(author_json['author_id']) == numerical_id:
                         author_name = author_json['name']
-                book_instance.add_author(Author(numerical_id, author_name))
+                        author_average_rating = float(author_json['average_rating'])
+                        author_ratings_count = int(author_json['ratings_count'])
+                author = Author(numerical_id, author_name)
+                author.average_rating = author_average_rating
+                author.ratings_count = author_ratings_count
+                book_instance.add_author(author)
+
 
             self.__dataset_of_books.append(book_instance)

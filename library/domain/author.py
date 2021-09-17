@@ -16,6 +16,9 @@ class Author:
         # We use a set so each unique author is only represented once.
         self.__authors_this_one_has_worked_with = set()
 
+        self.__average_rating = None
+        self.__ratings_count = None
+
     @property
     def unique_id(self) -> int:
         return self.__unique_id
@@ -35,6 +38,34 @@ class Author:
                 raise ValueError
         else:
             raise ValueError
+
+    @property
+    def average_rating(self) -> float:
+        return self.__average_rating
+
+    @average_rating.setter
+    def average_rating(self, average_rating: float):
+        if average_rating < 0:
+            raise ValueError
+        if not isinstance(average_rating, float):
+            if isinstance(average_rating, int):
+                self.__average_rating = float(average_rating)
+                return
+            else:
+                raise TypeError
+        self.__average_rating = average_rating
+
+    @property
+    def ratings_count(self) -> int:
+        return self.__ratings_count
+
+    @ratings_count.setter
+    def ratings_count(self, count: int):
+        if count < 0:
+            raise ValueError
+        if not isinstance(count, int):
+            raise TypeError
+        self.__ratings_count = count
 
     def add_coauthor(self, coauthor):
         if isinstance(coauthor, self.__class__) and coauthor.unique_id != self.unique_id:

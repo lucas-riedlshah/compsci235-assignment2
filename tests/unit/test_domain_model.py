@@ -163,6 +163,35 @@ class TestAuthor:
         with pytest.raises(AttributeError):
             author1.unique_id = 12
 
+    def test_average_rating(self):
+        author1 = Author(3675, "Barack Obama")
+        author1.average_rating = 4
+        assert author1.average_rating == 4
+        author1.average_rating = 3.5
+        assert author1.average_rating == 3.5
+
+        with pytest.raises(ValueError):
+            author1.average_rating = -1
+
+        with pytest.raises(TypeError):
+            author1.average_rating = "1"
+        
+
+    def test_ratings_count(self):
+        author1 = Author(3675, "Barack Obama")
+        author1.ratings_count = 4
+        assert author1.ratings_count == 4
+
+        with pytest.raises(ValueError):
+            author1.ratings_count = -1
+
+        with pytest.raises(TypeError):
+            author1.ratings_count = 1.5
+
+        with pytest.raises(TypeError):
+            author1.ratings_count = "1"
+
+
 
 class TestBook:
 
