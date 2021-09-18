@@ -1,3 +1,12 @@
 {% extends 'base.html' %} {% block content %}
-<h2>Books</h2>
+<h2>Books{{ ' from ' + current_release_year|string if current_release_year is not none }}</h2>
+<form action="books" method="get">
+  <label for="year">Release Year:</label>
+  <select title="release year" name="year" onchange="this.form.submit()">
+    <option value="">All</option>
+    {% for year in all_release_years %}
+      <option value="{{ year }}" {{ 'selected' if year == current_release_year }}>{{ year }}</option>
+    {% endfor %}
+  </select>
+</form>
 {% include 'components/books_list.html' %} {% endblock %}
