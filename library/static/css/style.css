@@ -27,6 +27,7 @@ body {
   flex-wrap: wrap;
   min-width: 300px;
   font-size: 1.3em;
+  color: white;
 }
 
 .header__nav > .nav__item {
