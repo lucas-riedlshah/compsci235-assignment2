@@ -48,10 +48,9 @@ body {
   height: 100%;
   width: max(220px, 18vw);
   margin-right: 5px;
-  font-size: 2em;
   border-radius: 50px;
   border: none;
-  padding: 0 15px;
+  padding: 0.5em 15px;
 }
 
 .header__search > .search__input:focus {
