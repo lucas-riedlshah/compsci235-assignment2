@@ -42,6 +42,13 @@ class MemoryRepository(AbstractRepository):
     def get_all_authors(self) -> list[Author]:
         return list(self.__authors.values())
 
+    def get_all_release_years(self) -> list[int]:
+        release_years = []
+        for book in self.__books.values():
+            if book.release_year is not None and book.release_year not in release_years:
+                insort_left(release_years, book.release_year)
+        return release_years
+
     def search_books_by_title(self, title: str) -> list[Book]:
         results = []
         title = title.strip()

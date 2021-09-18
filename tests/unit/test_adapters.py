@@ -103,6 +103,9 @@ class TestMemoryRepository:
         assert len(in_memory_repo.get_books_from_release_year(2)) == 0
         assert len(in_memory_repo.get_books_from_release_year(2012)) == 3
 
+    def test_get_all_release_years(self, in_memory_repo):
+        assert len(in_memory_repo.get_all_release_years()) == 8
+
 
     def test_get_books_by_publisher(self, in_memory_repo):
         publisher = in_memory_repo.get_all_publishers()[0]

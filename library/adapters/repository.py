@@ -68,6 +68,11 @@ class AbstractRepository(abc.ABC):
         raise NotImplementedError
 
     @abc.abstractmethod
+    def get_all_release_years(self) -> list[int]:
+        """ Returns a list of all release years """
+        raise NotImplementedError
+
+    @abc.abstractmethod
     def search_books_by_title(self, title: str) -> list[Book]:
         """ Returns a list of `Book`s who's title(s) contain the given string
 
