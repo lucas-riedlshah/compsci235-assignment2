@@ -110,29 +110,30 @@ body {
   display: grid;
   grid-template-columns: repeat(1, 1fr);
   justify-content: center;
+  text-align: center;
 }
 
 /* This might not be the best way, but it works... */
 
-@media (min-width: 680px) {
+@media (min-width: 840px) {
   .list {
     grid-template-columns: repeat(2, 1fr);
   }
 }
 
-@media (min-width: 1020px) {
+@media (min-width: 1120px) {
   .list {
     grid-template-columns: repeat(3, 1fr);
   }
 }
 
-@media (min-width: 1360px) {
+@media (min-width: 1480px) {
   .list {
     grid-template-columns: repeat(4, 1fr);
   }
 }
 
-@media (min-width: 1700px) {
+@media (min-width: 1850px) {
   .list {
     grid-template-columns: repeat(5, 1fr);
   }
