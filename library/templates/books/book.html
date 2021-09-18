@@ -6,7 +6,7 @@
       by {% for author in book.authors %}
       <a href="{{ url_for('authors_bp.author', id=author.unique_id) }}"
         >{{author.full_name}}</a
-      >{{ ', ' if author != book.authors[-1]}} {% endfor %}
+      >{{ ' and ' if author == book.authors[-2] else ', ' if author != book.authors[-1]}} {% endfor %}
     </h3>
   </div>
   <div

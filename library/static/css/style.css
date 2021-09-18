@@ -108,7 +108,7 @@ body {
 
 .list {
   display: grid;
-  grid-template-columns: repeat(1, auto);
+  grid-template-columns: repeat(1, 1fr);
   justify-content: center;
 }
 
@@ -116,25 +116,25 @@ body {
 
 @media (min-width: 680px) {
   .list {
-    grid-template-columns: repeat(2, auto);
+    grid-template-columns: repeat(2, 1fr);
   }
 }
 
 @media (min-width: 1020px) {
   .list {
-    grid-template-columns: repeat(3, auto);
+    grid-template-columns: repeat(3, 1fr);
   }
 }
 
 @media (min-width: 1360px) {
   .list {
-    grid-template-columns: repeat(4, auto);
+    grid-template-columns: repeat(4, 1fr);
   }
 }
 
 @media (min-width: 1700px) {
   .list {
-    grid-template-columns: repeat(5, auto);
+    grid-template-columns: repeat(5, 1fr);
   }
 }
 
@@ -144,20 +144,21 @@ body {
   align-items: center;
   min-height: 100px;
   min-width: 300px;
+  padding: 1em 0.5em;
   margin: 20px;
   border-radius: 7px;
   overflow: hidden;
   text-align: center;
   color: black;
   text-decoration: none;
-  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14),
-    0 3px 1px -2px rgba(0, 0, 0, 0.12), 0 1px 5px 0 rgba(0, 0, 0, 0.2);
+  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.07),
+    0 3px 1px -2px rgba(0, 0, 0, 0.06), 0 1px 5px 0 rgba(0, 0, 0, 0.1);
   transition: box-shadow 0.2s;
 }
 
 .list .list__item:hover {
-  box-shadow: 0 8px 10px 1px rgba(0, 0, 0, 0.14),
-    0 3px 14px 2px rgba(0, 0, 0, 0.12), 0 5px 5px -3px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 8px 10px 1px rgba(0, 0, 0, 0.07),
+    0 3px 14px 2px rgba(0, 0, 0, 0.06), 0 5px 5px -3px rgba(0, 0, 0, 0.1);
 }
 
 /* books_list.html */
@@ -175,8 +176,8 @@ body {
   bottom: 0;
   background-color: white;
   width: calc(100% - 1em);
-  margin: 0;
   padding: 1em 0.5em;
+  margin: 0;
   color: black;
 }
 
