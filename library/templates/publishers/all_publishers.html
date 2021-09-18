@@ -1,0 +1,17 @@
+{% extends 'base.html' %} {% block content %}
+<h2>Publishers</h2>
+<div>
+  {% include 'components/page_link_bar.html' %}
+  <div class="list publisher-list">
+    {% for publisher in publishers %}
+    <a
+      href="{{ url_for('publishers_bp.publisher', name=publisher.name) }}"
+      class="list__item publisher-list__publisher"
+    >
+      <h3>{{ publisher.name }}</h3>
+    </a>
+    {% endfor %}
+  </div>
+  {% include 'components/page_link_bar.html' %}
+</div>
+{% endblock %}

@@ -18,7 +18,7 @@
     {% if book.publisher.name != 'N/A' %}
     <p>
       Publisher:
-      <a href="{{ url_for('publishers_bp.publisher', id=book.publisher.name) }}"
+      <a href="{{ url_for('publishers_bp.publisher', name=book.publisher.name) }}"
         >{{ book.publisher.name }}</a
       >
     </p>
