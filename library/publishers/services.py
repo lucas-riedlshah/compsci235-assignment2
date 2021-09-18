@@ -1,5 +1,5 @@
 from library.adapters.repository import AbstractRepository
-from library.domain import Publisher
+from library.domain import Publisher, Book
 from math import ceil
 
 PUBLISHERS_PER_PAGE = 25
