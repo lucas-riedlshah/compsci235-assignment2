@@ -1,5 +1,5 @@
 from library.adapters.repository import AbstractRepository
-from library.domain import Author
+from library.domain import Author, Book
 from math import ceil
 
 AUTHORS_PER_PAGE = 25
@@ -10,8 +10,8 @@ def get_author(repo: AbstractRepository, author_id: int):
     return repo.get_author(author_id)
 
 
-def get_nth_books_by_author_page(repo: AbstractRepository, author_id: int, page: int):
-    """Gets the nth books-by-author page"""
+def get_nth_books_by_author_page(repo: AbstractRepository, author_id: int, page: int) -> list[Book]:
+    """Gets the nth page of books by the author"""
     books = sorted(repo.get_books_by_author(get_author(repo, author_id)),
                    key=lambda book: book.release_year if book.release_year is not None else 99999, reverse=True)
     return books[page * AUTHOR_BOOKS_PER_PAGE - AUTHOR_BOOKS_PER_PAGE: page * AUTHOR_BOOKS_PER_PAGE]
