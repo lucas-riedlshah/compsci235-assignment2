@@ -27,3 +27,9 @@ def test_get_books_page_count(in_memory_repo):
 
 def test_get_all_release_years(in_memory_repo):
     assert len(get_all_release_years(in_memory_repo)) == 8
+
+def test_add_review(in_memory_repo):
+    book = get_book(in_memory_repo, 25742454)
+    add_review(in_memory_repo, "lucas", book, "review text content", 3)
+    assert get_book_reviews(in_memory_repo, book)[0].review_text == "review text content"
+

@@ -35,16 +35,35 @@
   </div>
   <div class="book__reviews">
     <h3>Reviews</h3>
-    {% if reviews|length == 0 %}
-    <p>There are no reviews yet!</p>
-    {% endif %} {% for review in reviews %}
-    <div class="review">
-      <p class="review__rating">{{ reivew.rating }} / 5</p>
-      <p class="review__user">by {{ reivew.user.user_name }} / 5</p>
-      <p class="review__timestamp">at {{ review.timestamp }}</p>
-      <p class="review__text">{{ review.review_text }}</p>
+    {% if 'user_name' in session %}
+    <div class="reviews__add-review">
+      <h4>Write a review:</h4>
+      <form method="POST" action="{{ handler_url }}" class="add-review__form">
+        {{ review_form.csrf_token }}
+        <div class="form__field">
+          {{ review_form.rating.label(class_="form__rating-label") }} {{
+          review_form.rating(class_="form__rating", min=0, max=5) }}
+        </div>
+        <div class="form__field">
+          {{ review_form.review_text(class_="form__text-area",
+          title="review-text", placeholder="Enter your review (optional)") }}
+        </div>
+        <div class="form__submit">{{ review_form.submit }}</div>
+      </form>
     </div>
-    {% endfor %}
+    {% endif %} {% if reviews|length == 0 %}
+    <p>There are no reviews yet!</p>
+    {% else %} {% for review in reviews %}
+    <div class="review">
+      <span class="review__information">
+        Rated <b>{{ review.rating }} / 5</b> by {{ review.user_name }}
+      </span>
+      <span class="review__timestamp">
+        {{ review.timestamp.strftime('%Y-%m-%d') }}
+      </span>
+      <span class="review__text">{{ review.review_text }}</span>
+    </div>
+    {% endfor %} {% endif %}
   </div>
 </div>
 {% endblock %}

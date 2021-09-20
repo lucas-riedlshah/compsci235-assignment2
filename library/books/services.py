@@ -24,3 +24,7 @@ def get_books_page_count(repo: AbstractRepository, year: int = None) -> int:
 
 def get_all_release_years(repo: AbstractRepository) -> list[int]:
     return repo.get_all_release_years()
+
+def add_review(repo: AbstractRepository, user_name: str, book: Book, review_text: str, rating: int):
+    review = Review(user_name, book, review_text, rating)
+    repo.add_review(review)
