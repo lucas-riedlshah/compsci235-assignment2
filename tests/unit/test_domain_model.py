@@ -334,42 +334,49 @@ class TestReview:
         book = Book(2675376, "Harry Potter")
         review_text = "  This book was very enjoyable.   "
         rating = 4
-        review = Review(book, review_text, rating)
+        review = Review("lucas", book, review_text, rating)
 
+        assert review.user_name == "lucas"
         assert str(review.book) == "<Book Harry Potter, book id = 2675376>"
         assert str(review.review_text) == "This book was very enjoyable."
         assert review.rating == 4
 
     def test_attributes_access(self):
         book = Book(2675376, "Harry Potter")
-        review = Review(book, 42, 3)
+        review = Review("lucas", book, 42, 3)
+        assert review.user_name == "lucas"
         assert str(review.book) == "<Book Harry Potter, book id = 2675376>"
         assert str(review.review_text) == "N/A"
         assert review.rating == 3
+
+    def test_invalid_user_name(self):
+        book = Book(2675376, "Harry Potter")
+        review = Review(5, book, "review content here", 2)
+        assert review.user_name == None
 
     def test_invalid_parameters(self):
         book = Book(2675376, "Harry Potter")
         review_text = "This book was very enjoyable."
 
         with pytest.raises(ValueError):
-            review = Review(book, review_text, -1)
+            review = Review("lucas", book, review_text, -1)
 
         with pytest.raises(ValueError):
-            review = Review(book, review_text, 6)
+            review = Review("lucas", book, review_text, 6)
 
     def test_set_of_reviews(self):
         book1 = Book(2675376, "Harry Potter")
         book2 = Book(874658, "Lord of the Rings")
-        review1 = Review(book1, "I liked this book", 4)
-        review2 = Review(book2, "This book was ok", 3)
-        review3 = Review(book1, "This book was exceptional", 5)
+        review1 = Review("lucas", book1, "I liked this book", 4)
+        review2 = Review("lucas", book2, "This book was ok", 3)
+        review3 = Review("lucas", book1, "This book was exceptional", 5)
         assert review1 != review2
         assert review1 != review3
         assert review3 != review2
 
     def test_wrong_book_object(self):
         publisher = Publisher("DC Comics")
-        review = Review(publisher, "I liked this book", 4)
+        review = Review("lucas", publisher, "I liked this book", 4)
         assert review.book is None
 
 
@@ -430,8 +437,8 @@ class TestUser:
                  Book(89576, "Lord of the Rings")]
         user = User("Martin", "pw12345")
         assert user.reviews == []
-        review1 = Review(books[0], "I liked this book", 4)
-        review2 = Review(books[1], "This book was ok", 2)
+        review1 = Review("lucas", books[0], "I liked this book", 4)
+        review2 = Review("lucas", books[1], "This book was ok", 2)
         user.add_review(review1)
         user.add_review(review2)
         assert str(user.reviews[0].review_text) == "I liked this book"

@@ -3,11 +3,16 @@ from .book import Book
 
 class Review:
 
-    def __init__(self, book: Book, review_text: str, rating: int):
+    def __init__(self, user_name: str, book: Book, review_text: str, rating: int):
         if isinstance(book, Book):
             self.__book = book
         else:
             self.__book = None
+        
+        if isinstance(user_name, str):
+            self.__user_name = user_name
+        else:
+            self.__user_name = None
 
         if isinstance(review_text, str):
             self.__review_text = review_text.strip()
@@ -24,6 +29,10 @@ class Review:
     @property
     def book(self) -> Book:
         return self.__book
+
+    @property
+    def user_name(self) -> str:
+        return self.__user_name
 
     @property
     def review_text(self) -> str:
