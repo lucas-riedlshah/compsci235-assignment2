@@ -188,8 +188,8 @@ body {
 .book {
   display: grid;
   grid-template-columns: [cover] 33vw [spacer] 25px [information] auto;
-  grid-template-rows: [title] 8em [details] auto;
-  height: 100%;
+  grid-template-rows: [title] min-content [details] min-content [reviews] auto;
+  min-height: 100%;
 }
 
 .book > .book__title {
@@ -199,7 +199,7 @@ body {
 }
 
 .book > .book__cover {
-  grid-area: 1 / cover / 3 / cover;
+  grid-area: 1 / cover / 4 / cover;
   width: 100%;
   height: 100%;
   background-position: center center;
@@ -214,6 +214,12 @@ body {
 
 .book__details > p:first-child {
   margin-top: 0;
+}
+
+.book > .book__reviews {
+  grid-column: information;
+  grid-row: reviews;
+}
 
 /* credentials.html */
 

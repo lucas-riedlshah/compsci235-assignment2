@@ -52,4 +52,5 @@ def book():
     book = get_book(repo, book_id)
     if book is None:
         return redirect(url_for('home_bp.home'))
-    return render_template('books/book.html', book=book)
+    reviews = get_book_reviews(repo, book)
+    return render_template('books/book.html', book=book, reviews=reviews)

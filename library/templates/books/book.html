@@ -6,7 +6,8 @@
       by {% for author in book.authors %}
       <a href="{{ url_for('authors_bp.author', id=author.unique_id) }}"
         >{{author.full_name}}</a
-      >{{ ' and ' if author == book.authors[-2] else ', ' if author != book.authors[-1]}} {% endfor %}
+      >{{ ' and ' if author == book.authors[-2] else ', ' if author !=
+      book.authors[-1]}} {% endfor %}
     </h3>
   </div>
   <div
@@ -18,13 +19,32 @@
     {% if book.publisher.name != 'N/A' %}
     <p>
       Publisher:
-      <a href="{{ url_for('publishers_bp.publisher', name=book.publisher.name) }}"
+      <a
+        href="{{ url_for('publishers_bp.publisher', name=book.publisher.name) }}"
         >{{ book.publisher.name }}</a
       >
     </p>
+    {% endif %} {% if book.release_year is not none %}
+    <p>
+      Release Year:
+      <a href="{{ url_for('books_bp.books', year=book.release_year) }}"
+        >{{ book.release_year }}</a
+      >
+    </p>
     {% endif %}
-    <p>Release Year: <a href="{{ url_for('books_bp.books', year=book.release_year) }}"
-      >{{ book.release_year }}</p>
+  </div>
+  <div class="book__reviews">
+    <h3>Reviews</h3>
+    {% if reviews|length == 0 %}
+    <p>There are no reviews yet!</p>
+    {% endif %} {% for review in reviews %}
+    <div class="review">
+      <p class="review__rating">{{ reivew.rating }} / 5</p>
+      <p class="review__user">by {{ reivew.user.user_name }} / 5</p>
+      <p class="review__timestamp">at {{ review.timestamp }}</p>
+      <p class="review__text">{{ review.review_text }}</p>
+    </div>
+    {% endfor %}
   </div>
 </div>
 {% endblock %}
