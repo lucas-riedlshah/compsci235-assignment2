@@ -125,7 +125,15 @@ class MemoryRepository(AbstractRepository):
     def add_review(self, review: Review):
         if review.book.book_id not in self.__reviews:
             self.__reviews[review.book.book_id] = []
-        self.__reviews[review.book.book_id].append(review)
+        user = self.get_user(review.user_name)
+        for i in range(len(user.reviews)):
+            if user.reviews[i].book == review.book:
+                repository_book_review_index = self.__reviews[review.book.book_id].index(user.reviews[i])
+                self.__reviews[review.book.book_id].pop(repository_book_review_index)
+                user.reviews.pop(i)
+                break
+        insort_left(user.reviews, review)
+        insort_left(self.__reviews[review.book.book_id], review)
 
     def get_book_reviews(self, book_id: int) -> list[Review]:
         if book_id in self.__reviews:

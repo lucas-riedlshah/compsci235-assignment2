@@ -131,7 +131,9 @@ class TestMemoryRepository:
 
     def test_add_review_get_book_reviews(self, in_memory_repo):
         book = Book(0, 'Star Trek: The Next Generation')
-        review = Review("lucas", book, "Resistance is futile.", 5)
+        user = User("lucas", "ABC123xyz")
+        in_memory_repo.add_user(user)
+        review = Review(user.user_name, book, "Resistance is futile.", 5)
         in_memory_repo.add_review(review)
         assert len(in_memory_repo.get_book_reviews(book.book_id)) == 1
 

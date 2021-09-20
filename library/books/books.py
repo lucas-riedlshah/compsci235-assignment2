@@ -69,10 +69,18 @@ def book():
 
     reviews = get_book_reviews(repo, book_id)
 
+    session_user_has_reviewed = False
+    if 'user_name' in session:
+        for review in reviews:
+            if review.user_name == session['user_name']:
+                session_user_has_reviewed = True
+                break
+
     return render_template(
         'books/book.html',
         book=book,
         reviews=reviews,
+        session_user_has_reviewed=session_user_has_reviewed,
         review_form=review_form,
         handler_url=url_for('books_bp.book', id=book_id)
     )

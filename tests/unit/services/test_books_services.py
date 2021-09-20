@@ -1,6 +1,6 @@
 import pytest
 
-from library.domain import Review
+from library.domain import Review, User
 from library.books.services import *
 
 
@@ -12,6 +12,8 @@ def test_get_book_reviews(in_memory_repo):
     book = get_book(in_memory_repo, 25742454)
     assert len(get_book_reviews(in_memory_repo, book.book_id)) == 0
 
+    user = User("lucas", "ABC123xyz")
+    in_memory_repo.add_user(user)
     review = Review("lucas", book, "review text content", 3)
     in_memory_repo.add_review(review)
     assert len(get_book_reviews(in_memory_repo, book.book_id)) == 1
@@ -32,6 +34,8 @@ def test_get_all_release_years(in_memory_repo):
 
 
 def test_add_review(in_memory_repo):
+    user = User("lucas", "ABC123xyz")
+    in_memory_repo.add_user(user)
     add_review(in_memory_repo, "lucas", 25742454, "review text content", 3)
     assert get_book_reviews(in_memory_repo, 25742454)[
         0].review_text == "review text content"
