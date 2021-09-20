@@ -127,7 +127,7 @@ class MemoryRepository(AbstractRepository):
             self.__reviews[review.book.book_id] = []
         self.__reviews[review.book.book_id].append(review)
 
-    def get_book_reviews(self, book: Book) -> list[Review]:
-        if book.book_id in self.__reviews:
-            return self.__reviews[book.book_id]
+    def get_book_reviews(self, book_id: int) -> list[Review]:
+        if book_id in self.__reviews:
+            return self.__reviews[book_id]
         return []

@@ -133,7 +133,7 @@ class TestMemoryRepository:
         book = Book(0, 'Star Trek: The Next Generation')
         review = Review("lucas", book, "Resistance is futile.", 5)
         in_memory_repo.add_review(review)
-        assert len(in_memory_repo.get_book_reviews(book)) == 1
+        assert len(in_memory_repo.get_book_reviews(book.book_id)) == 1
 
     def test_get_non_existent_book_reviews(self, in_memory_repo):
         book = Book(0, 'Star Trek: The Next Generation')

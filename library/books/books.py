@@ -63,11 +63,11 @@ def book():
     review_form = ReviewForm()
 
     if 'user_name' in session and review_form.validate_on_submit():
-        add_review(repo, session["user_name"], book,
+        add_review(repo, session["user_name"], book_id,
                    review_form.review_text.data, review_form.rating.data)
         return redirect(url_for('books_bp.book', id=book_id))
 
-    reviews = get_book_reviews(repo, book)
+    reviews = get_book_reviews(repo, book_id)
 
     return render_template(
         'books/book.html',

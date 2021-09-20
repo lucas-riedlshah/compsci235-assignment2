@@ -7,8 +7,8 @@ BOOKS_PER_PAGE = 10
 def get_book(repo: AbstractRepository, book_id: int) -> Book:
     return repo.get_book(book_id)
 
-def get_book_reviews(repo: AbstractRepository, book: Book) -> list[Review]:
-    return repo.get_book_reviews(book)
+def get_book_reviews(repo: AbstractRepository, book_id: int) -> list[Review]:
+    return repo.get_book_reviews(book_id)
 
 def get_nth_books_page(repo: AbstractRepository, page: int, year: int = None) -> list[Book]:
     if year is None:
@@ -25,6 +25,7 @@ def get_books_page_count(repo: AbstractRepository, year: int = None) -> int:
 def get_all_release_years(repo: AbstractRepository) -> list[int]:
     return repo.get_all_release_years()
 
-def add_review(repo: AbstractRepository, user_name: str, book: Book, review_text: str, rating: int):
+def add_review(repo: AbstractRepository, user_name: str, book_id: int, review_text: str, rating: int):
+    book = repo.get_book(book_id)
     review = Review(user_name, book, review_text, rating)
     repo.add_review(review)

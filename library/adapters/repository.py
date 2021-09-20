@@ -148,7 +148,7 @@ class AbstractRepository(abc.ABC):
         raise NotImplementedError
 
     @abc.abstractmethod
-    def get_book_reviews(self, book: Book) -> list[Review]:
+    def get_book_reviews(self, book_id: int) -> list[Review]:
         """ Returns a list of `Review`s of the given `Book`.
 
             If no reviews exist, returns an empty list.
