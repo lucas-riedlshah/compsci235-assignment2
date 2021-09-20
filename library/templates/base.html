@@ -34,10 +34,12 @@
           >Publishers</a
         >
         |
-        <!-- TODO: This should be /user if logged in. -->
-        <a class="nav__item" href="/register">Register</a>
-        <!-- TODO: This should be /logout if the user is already logged in. -->
-        <a class="nav__item" href="/login">Log In</a>
+        {% if 'user_name' in session %}
+        <a class="nav__item" href="{{ url_for('authentication_bp.logout') }}">Log Out</a>
+        {% else %}
+        <a class="nav__item" href="{{ url_for('authentication_bp.register') }}">Register</a>
+        <a class="nav__item" href="{{ url_for('authentication_bp.login') }}">Log In</a>
+        {% endif %}
       </div>
       <form class="header__search" method="GET" action="search">
         <input

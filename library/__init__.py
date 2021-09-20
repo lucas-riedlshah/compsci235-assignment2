@@ -35,4 +35,7 @@ def create_app(test_config = None):
         from .publishers import publishers
         app.register_blueprint(publishers.publishers_blueprint)
 
+        from .authentication import authentication
+        app.register_blueprint(authentication.authentication_blueprint)
+
     return app

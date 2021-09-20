@@ -214,4 +214,33 @@ body {
 
 .book__details > p:first-child {
   margin-top: 0;
+
+/* credentials.html */
+
+.credentials {
+  display: flex;
+  height: 100%;
+  align-items: center;
+  justify-content: center;
+}
+
+.credentials__form > * {
+  margin: 10px 0;
+}
+
+.credentials__form > .form__field {
+  display: flex;
+  align-items: center;
+}
+
+.credentials__form > .form__field > * {
+  flex-grow: 1;
+}
+
+.credentials__form > .form__field > label {
+  margin-right: 0.5ch;
+}
+
+.credentials__form > .form__submit {
+  text-align: center;
 }
