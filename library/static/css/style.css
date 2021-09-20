@@ -263,6 +263,10 @@ body {
   justify-content: center;
 }
 
+.credentials > .credentials__container {
+  width: 400px;
+}
+
 .credentials__form > * {
   margin: 10px 0;
 }
@@ -272,7 +276,7 @@ body {
   align-items: center;
 }
 
-.credentials__form > .form__field > * {
+.credentials__form > .form__field > input {
   flex-grow: 1;
 }
 
