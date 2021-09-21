@@ -55,11 +55,11 @@ def get_all_release_years(repo: AbstractRepository) -> list[int]:
 
 
 def get_all_authors(repo: AbstractRepository) -> list[Author]:
-    return repo.get_all_authors()
+    return sorted(repo.get_all_authors(), key=lambda author: author.full_name)
 
 
 def get_all_publishers(repo: AbstractRepository) -> list[Publisher]:
-    return repo.get_all_publishers()
+    return sorted(repo.get_all_publishers(), key=lambda publisher: publisher.name)
 
 
 def add_review(repo: AbstractRepository, user_name: str, book_id: int, review_text: str, rating: int):
