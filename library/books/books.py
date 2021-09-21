@@ -26,20 +26,63 @@ def books():
     except (ValueError, TypeError):
         year = None
 
-    books = get_nth_books_page(repo, page, year)
-    all_release_years = get_all_release_years(repo)
-    page_count = get_books_page_count(repo, year)
-    first_page_url = url_for('books_bp.books', page=1, year=year or "")
-    next_page_url = url_for('books_bp.books', page=page + 1,
-                            year=year or "") if page < page_count else None
+    author_id = request.args.get('author')
+    try:
+        author_id = int(author_id)
+    except (ValueError, TypeError):
+        author_id = None
+
+    publisher_name = request.args.get('publisher')
+    if (publisher_name is not None) and len(publisher_name) == 0:
+        publisher_name = None
+
+    books = get_nth_books_page(repo, page, year, author_id, publisher_name)
+    page_count = get_books_page_count(repo, year, author_id, publisher_name)
+
+    first_page_url = url_for(
+        'books_bp.books',
+        page=1,
+        year=year or "",
+        author=author_id or "",
+        publisher=publisher_name or ""
+    )
+    next_page_url = url_for(
+        'books_bp.books',
+        page=page + 1,
+        year=year or "",
+        author=author_id or "",
+        publisher=publisher_name or ""
+    ) if page < page_count else None
     previous_page_url = url_for(
-        'books_bp.books', page=page - 1, year=year or "") if page > 1 else None
-    last_page_url = url_for('books_bp.books', page=page_count, year=year or "")
+        'books_bp.books',
+        page=page - 1,
+        year=year or "",
+        author=author_id or "",
+        publisher=publisher_name or ""
+    ) if page > 1 else None
+    last_page_url = url_for(
+        'books_bp.books',
+        page=page_count,
+        year=year or "",
+        author=author_id or "",
+        publisher=publisher_name or ""
+    )
+
+    all_release_years = get_all_release_years(repo)
+    all_authors = get_all_authors(repo)
+    all_publishers = get_all_publishers(repo)
+
+    current_author = get_author(repo, author_id)
+
     return render_template(
         'books/all_books.html',
         books=books,
         current_release_year=year,
+        current_author=current_author,
+        current_publisher=publisher_name,
         all_release_years=all_release_years,
+        all_authors=all_authors,
+        all_publishers=all_publishers,
         first_page_url=first_page_url,
         next_page_url=next_page_url,
         previous_page_url=previous_page_url,

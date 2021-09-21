@@ -1,6 +1,11 @@
 {% extends 'base.html' %} {% block content %}
-<h2>Books{{ ' from ' + current_release_year|string if current_release_year is not none }}</h2>
-<form action="books" method="get">
+<h2>
+  Books
+  {{ ' by ' + current_author.full_name if current_author is not none }}
+  {{ ' from ' + current_release_year|string if current_release_year is not none }}
+  {{ ' published by ' + current_publisher if current_publisher is not none }}
+</h2>
+<form action="books" method="GET">
   <label for="year">Release Year:</label>
   <select title="release year" name="year" onchange="this.form.submit()">
     <option value="">All</option>
@@ -8,5 +13,26 @@
       <option value="{{ year }}" {{ 'selected' if year == current_release_year }}>{{ year }}</option>
     {% endfor %}
   </select>
+  <label for="author">Author:</label>
+  <select title="author" name="author" onchange="this.form.submit()">
+    <option value="">All</option>
+    {% for author in all_authors %}
+      <option value="{{ author.unique_id }}" {{ 'selected' if author.unique_id == current_author.unique_id }}>{{ author.full_name }}</option>
+    {% endfor %}
+  </select>
+  <label for="publisher">Publisher:</label>
+  <select title="publisher" name="publisher" onchange="this.form.submit()">
+    <option value="">All</option>
+    {% for publisher in all_publishers %}
+      <option value="{{ publisher.name }}" {{ 'selected' if publisher.name == current_publisher }}>{{ publisher.name }}</option>
+    {% endfor %}
+  </select>
 </form>
-{% include 'components/books_list.html' %} {% endblock %}
+{% if books|length > 0 %}
+  {% include 'components/books_list.html' %}
+{% else %}
+  <center>
+    <b>No books found. Try widening your search options.</b>
+  </center>
+{% endif %}
+{% endblock %}
