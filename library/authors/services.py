@@ -3,22 +3,10 @@ from library.domain import Author, Book
 from math import ceil
 
 AUTHORS_PER_PAGE = 25
-AUTHOR_BOOKS_PER_PAGE = 10
 
 
 def get_author(repo: AbstractRepository, author_id: int):
     return repo.get_author(author_id)
-
-
-def get_nth_books_by_author_page(repo: AbstractRepository, author_id: int, page: int) -> list[Book]:
-    """Gets the nth page of books by the author"""
-    books = sorted(repo.get_books_by_author(get_author(repo, author_id)),
-                   key=lambda book: book.release_year if book.release_year is not None else 99999, reverse=True)
-    return books[page * AUTHOR_BOOKS_PER_PAGE - AUTHOR_BOOKS_PER_PAGE: page * AUTHOR_BOOKS_PER_PAGE]
-
-
-def get_books_by_author_page_count(repo: AbstractRepository, author_id: int):
-    return ceil(len(repo.get_books_by_author(get_author(repo, author_id))) / AUTHOR_BOOKS_PER_PAGE)
 
 
 def get_nth_authors_page(repo: AbstractRepository, page: int) -> list[Author]:
