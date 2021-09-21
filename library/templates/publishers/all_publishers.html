@@ -5,7 +5,7 @@
   <div class="list publisher-list">
     {% for publisher in publishers %}
     <a
-      href="{{ url_for('publishers_bp.publisher', name=publisher.name) }}"
+      href="{{ url_for('books_bp.books', publisher=publisher.name) }}"
       class="list__item publisher-list__publisher"
     >
       <h3>{{ publisher.name }}</h3>
