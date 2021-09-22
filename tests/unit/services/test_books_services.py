@@ -5,11 +5,11 @@ from library.books.services import *
 
 
 def test_get_book(in_memory_repo):
-    assert get_book(in_memory_repo, 25742454).title == "The Switchblade Mamma"
+    assert get_book(in_memory_repo, 25742454)['title'] == "The Switchblade Mamma"
 
 
 def test_get_book_reviews(in_memory_repo):
-    book = get_book(in_memory_repo, 25742454)
+    book = in_memory_repo.get_book(25742454)
     assert len(get_book_reviews(in_memory_repo, book.book_id)) == 0
 
     user = User("lucas", "ABC123xyz")
@@ -20,7 +20,7 @@ def test_get_book_reviews(in_memory_repo):
 
 
 def test_get_author(in_memory_repo):
-    assert get_author(in_memory_repo, 81563).full_name == "Jerry Siegel"
+    assert get_author(in_memory_repo, 81563)['full_name'] == "Jerry Siegel"
 
 
 def test_get_filtered_books(in_memory_repo):
@@ -62,4 +62,4 @@ def test_add_review(in_memory_repo):
     in_memory_repo.add_user(user)
     add_review(in_memory_repo, "lucas", 25742454, "review text content", 3)
     assert get_book_reviews(in_memory_repo, 25742454)[
-        0].review_text == "review text content"
+        0]['review_text'] == "review text content"
