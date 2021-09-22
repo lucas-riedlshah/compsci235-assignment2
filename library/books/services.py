@@ -1,20 +1,22 @@
+from math import ceil
+
 from library.adapters.repository import AbstractRepository
 from library.domain import Book, Review, Author, Publisher
-from math import ceil
+from library.utilities import book_to_dict, author_to_dict, review_to_dict, publisher_to_dict
 
 BOOKS_PER_PAGE = 10
 
 
-def get_book(repo: AbstractRepository, book_id: int) -> Book:
-    return repo.get_book(book_id)
+def get_book(repo: AbstractRepository, book_id: int):
+    return book_to_dict(repo.get_book(book_id))
 
 
-def get_book_reviews(repo: AbstractRepository, book_id: int) -> list[Review]:
-    return repo.get_book_reviews(book_id)
+def get_book_reviews(repo: AbstractRepository, book_id: int):
+    return [review_to_dict(review) for review in repo.get_book_reviews(book_id)]
 
 
-def get_author(repo: AbstractRepository, author_id: int) -> Author:
-    return repo.get_author(author_id)
+def get_author(repo: AbstractRepository, author_id: int):
+    return author_to_dict(repo.get_author(author_id))
 
 
 def get_filtered_books(repo: AbstractRepository, year: int = None, author_id: int = None, publisher_name: str = None) -> list[Book]:
@@ -40,10 +42,10 @@ def get_filtered_books(repo: AbstractRepository, year: int = None, author_id: in
     return books
 
 
-def get_nth_books_page(repo: AbstractRepository, page: int, year: int = None, author_id: int = None, publisher_name: str = None) -> list[Book]:
+def get_nth_books_page(repo: AbstractRepository, page: int, year: int = None, author_id: int = None, publisher_name: str = None):
     books = get_filtered_books(repo, year, author_id, publisher_name)
 
-    return books[page * BOOKS_PER_PAGE - BOOKS_PER_PAGE: page * BOOKS_PER_PAGE]
+    return [book_to_dict(book) for book in books[page * BOOKS_PER_PAGE - BOOKS_PER_PAGE: page * BOOKS_PER_PAGE]]
 
 
 def get_books_page_count(repo: AbstractRepository, year: int = None, author_id: int = None, publisher_name: str = None) -> int:
@@ -54,19 +56,15 @@ def get_all_release_years(repo: AbstractRepository) -> list[int]:
     return repo.get_all_release_years()
 
 
-def get_all_authors(repo: AbstractRepository) -> list[Author]:
-    return sorted(repo.get_all_authors(), key=lambda author: author.full_name)
+def get_all_authors(repo: AbstractRepository):
+    return [author_to_dict(author) for author in sorted(repo.get_all_authors(), key=lambda author: author.full_name)]
 
 
-def get_all_publishers(repo: AbstractRepository) -> list[Publisher]:
-    return sorted(repo.get_all_publishers(), key=lambda publisher: publisher.name)
+def get_all_publishers(repo: AbstractRepository):
+    return [publisher_to_dict(publisher) for publisher in sorted(repo.get_all_publishers(), key=lambda publisher: publisher.name)]
 
 
 def add_review(repo: AbstractRepository, user_name: str, book_id: int, review_text: str, rating: int):
     book = repo.get_book(book_id)
     review = Review(user_name, book, review_text, rating)
     repo.add_review(review)
-
-
-def book_to_dict(book: Book) -> {}:
-    pass

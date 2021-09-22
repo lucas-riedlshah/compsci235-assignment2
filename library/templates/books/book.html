@@ -42,7 +42,7 @@
         {{ review_form.csrf_token }}
         <div class="form__field">
           {{ review_form.rating.label(class_="form__rating-label") }} {{
-          review_form.rating(class_="form__rating", min=0, max=5) }}
+          review_form.rating(class_="form__rating", min=1, max=5) }}
         </div>
         <div class="form__field">
           {{ review_form.review_text(class_="form__text-area",

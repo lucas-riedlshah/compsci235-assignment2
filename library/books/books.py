@@ -72,7 +72,8 @@ def books():
     all_authors = get_all_authors(repo)
     all_publishers = get_all_publishers(repo)
 
-    current_author = get_author(repo, author_id)
+    current_author = get_author(
+        repo, author_id) if author_id is not None else None
 
     return render_template(
         'books/all_books.html',
@@ -103,6 +104,8 @@ def book():
     if book is None:
         return redirect(url_for('home_bp.home'))
 
+    reviews = get_book_reviews(repo, book_id)
+
     review_form = ReviewForm()
 
     if 'user_name' in session and review_form.validate_on_submit():
@@ -110,12 +113,10 @@ def book():
                    review_form.review_text.data, review_form.rating.data)
         return redirect(url_for('books_bp.book', id=book_id))
 
-    reviews = get_book_reviews(repo, book_id)
-
     session_user_has_reviewed = False
     if 'user_name' in session:
         for review in reviews:
-            if review.user_name == session['user_name']:
+            if review['user_name'] == session['user_name']:
                 session_user_has_reviewed = True
                 break
 

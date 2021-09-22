@@ -2,6 +2,7 @@ from werkzeug.security import generate_password_hash, check_password_hash
 
 from library.adapters.repository import AbstractRepository
 from library.domain import User
+from library.utilities import user_to_dict
 
 
 class NameNotUniqueException(Exception):
@@ -40,11 +41,3 @@ def authenticate_user(repo: AbstractRepository, user_name: str, password: str):
         authenticated = check_password_hash(user.password, password)
     if not authenticated:
         raise AuthenticationException
-
-
-def user_to_dict(user: User):
-    user_dict = {
-        'user_name': user.user_name,
-        'password': user.password
-    }
-    return user_dict
