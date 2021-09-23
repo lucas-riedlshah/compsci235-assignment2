@@ -1,10 +1,11 @@
 {% extends 'base.html' %} {% block content %}
-<h2>
-  Books
-  {{ ' by ' + current_author.full_name if current_author is not none }}
-  {{ ' from ' + current_release_year|string if current_release_year is not none }}
-  {{ ' published by ' + current_publisher if current_publisher is not none }}
-</h2>
+<h2>Books{% if current_author is not none 
+  %} by {{ current_author.full_name }}{% endif 
+    %}{% if current_release_year is not none 
+  %} from {{ current_release_year }}{% endif 
+    %}{% if current_author is not none 
+  %} published by {{ current_publisher }}{% endif 
+    %}</h2>
 <form action="books" method="GET">
   <label for="year">Release Year:</label>
   <select title="release year" name="year" onchange="this.form.submit()">
