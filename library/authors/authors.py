@@ -32,4 +32,3 @@ def authors():
         previous_page_url=previous_page_url,
         last_page_url=last_page_url
     )
-    return render_template('authors/all_authors.html')

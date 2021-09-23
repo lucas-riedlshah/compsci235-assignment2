@@ -32,4 +32,3 @@ def publishers():
         previous_page_url=previous_page_url,
         last_page_url=last_page_url
     )
-    return render_template('publishers/all_publishers.html')
