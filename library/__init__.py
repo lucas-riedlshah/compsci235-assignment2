@@ -32,6 +32,9 @@ def create_app(test_config = None):
         from .authors import authors
         app.register_blueprint(authors.authors_blueprint)
 
+        from .search import search
+        app.register_blueprint(search.search_blueprint)
+
         from .publishers import publishers
         app.register_blueprint(publishers.publishers_blueprint)
 

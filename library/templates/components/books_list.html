@@ -2,13 +2,12 @@
   {% include 'components/page_link_bar.html' %}
   <div class="list book-list">
     {% for book in books %}
-    <a href="{{ url_for('books_bp.book', id=book.book_id) }}">
-      <div
-        class="list__item book-list__book"
-        style="background-image: url('http://covers.openlibrary.org/b/isbn/{{ book.isbn }}.jpg'), url({{ url_for('static', filename='images/placeholder_book_cover.jpg') }})"
-      >
-        <h3>{{ book.title }}</h3>
-      </div>
+    <a
+      href="{{ url_for('books_bp.book', id=book.book_id) }}"
+      class="list__item book-list__book"
+      style="background-image: url('http://covers.openlibrary.org/b/isbn/{{ book.isbn }}.jpg'), url({{ url_for('static', filename='images/placeholder_book_cover.jpg') }})"
+    >
+      <h3>{{ book.title }}</h3>
     </a>
     {% endfor %}
   </div>

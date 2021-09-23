@@ -1,0 +1,65 @@
+{% extends 'base.html' %} {% block content %}
+<h2>
+  Search: "{{ query }}" {{ 'in ' + filter_category.capitalize() if
+  filter_category != ""}}
+</h2>
+{% if recommend_all_books_from_year %}
+<a href="{{ url_for('books_bp.books', year=query) }}">See all books from {{ query }}</a>
+{% endif %} {% if books|length > 0 %}
+<h3>Books</h3>
+<div class="list book-list">
+  {% for book in books %}
+  <a
+    href="{{ url_for('books_bp.book', id=book.book_id) }}"
+    class="list__item book-list__book"
+    style="background-image: url('http://covers.openlibrary.org/b/isbn/{{ book.isbn }}.jpg'), url({{ url_for('static', filename='images/placeholder_book_cover.jpg') }})"
+  >
+    <h3>{{ book.title }}</h3>
+  </a>
+  {% endfor %} {% if filter_category == "" %}
+  <a
+    class="list__item book-list__book more-button"
+    href="{{ url_for('search_bp.search', q=query, filter='books') }}"
+    >All book results &rarr;</a
+  >
+  {% endif %}
+</div>
+{% endif %} {% if authors|length > 0 %}
+<h3>Authors</h3>
+<div class="list">
+  {% for author in authors %}
+  <a
+    class="list__item"
+    href="{{ url_for('books_bp.books', author=author.unique_id) }}"
+  >
+    <h3>{{ author.full_name }}</h3>
+  </a>
+  {% endfor %} {% if filter_category == "" %}
+  <a
+    class="list__item more-button"
+    href="{{ url_for('search_bp.search', q=query, filter='authors') }}"
+    >All author results &rarr;</a
+  >
+  {% endif %}
+</div>
+{% endif %} {% if publishers|length > 0 %}
+<h3>Publishers</h3>
+<div class="list">
+  {% for publisher in publishers %}
+  <a
+    class="list__item"
+    href="{{ url_for('books_bp.books', publisher=publisher.name) }}"
+  >
+    <h3>{{ publisher.name }}</h3>
+  </a>
+  {% endfor %} {% if filter_category == "" %}
+  <a
+    class="list__item more-button"
+    href="{{ url_for('search_bp.search', q=query, filter='publishers') }}"
+    >All publisher results &rarr;</a
+  >
+  {% endif %}
+</div>
+{% endif %} {% if books|length + authors|length + publishers|length == 0 %}
+<h3>No results found. Try widening your search.</h3>
+{% endif %} {% endblock %}
