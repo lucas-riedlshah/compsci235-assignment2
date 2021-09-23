@@ -95,23 +95,27 @@ def books():
 def book():
     book_id = request.args.get('id')
     if book_id is None:
-        return redirect(url_for('home_bp.home'))
+        return redirect(url_for('books_bp.books'))
     try:
         book_id = int(book_id)
     except ValueError:
-        return redirect(url_for('home_bp.home'))
+        return redirect(url_for('books_bp.books'))
     book = get_book(repo, book_id)
     if book is None:
-        return redirect(url_for('home_bp.home'))
+        return redirect(url_for('books_bp.books'))
 
     reviews = get_book_reviews(repo, book_id)
 
     review_form = ReviewForm()
 
-    if 'user_name' in session and review_form.validate_on_submit():
-        add_review(repo, session["user_name"], book_id,
-                   review_form.review_text.data, review_form.rating.data)
-        return redirect(url_for('books_bp.book', id=book_id))
+    if review_form.validate_on_submit():
+        if 'user_name' in session:
+            add_review(repo, session["user_name"], book_id,
+                    review_form.review_text.data, review_form.rating.data)
+            return redirect(url_for('books_bp.book', id=book_id))
+        else:
+            return redirect(url_for('authentication_bp.login'))
+
 
     session_user_has_reviewed = False
     if 'user_name' in session:
