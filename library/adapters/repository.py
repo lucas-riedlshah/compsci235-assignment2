@@ -4,13 +4,6 @@ from datetime import date
 from .jsondatareader import BooksJSONReader
 from library.domain import Publisher, Author, Book, Review, User
 
-
-class RepositoryException(Exception):
-
-    def __init__(self, message=None):
-        pass
-
-
 class AbstractRepository(abc.ABC):
 
     @abc.abstractmethod
