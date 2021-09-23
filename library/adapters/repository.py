@@ -73,34 +73,26 @@ class AbstractRepository(abc.ABC):
         raise NotImplementedError
 
     @abc.abstractmethod
-    def search_books_by_title(self, title: str) -> list[Book]:
-        """ Returns a list of `Book`s who's title(s) contain the given string
+    def search_books_by_title(self, query: str) -> list[Book]:
+        """ Returns a list of `Book`s based on the query.
 
             If no such `Book`s exist, returns empty list.
         """
         raise NotImplementedError
 
     @abc.abstractmethod
-    def search_books_by_author_name(self, author_name: str) -> list[Book]:
-        """ Returns a list of `Book`s who's `Author`(s) name(s) contain the given string
+    def search_authors_by_full_name(self, query: str) -> list[Author]:
+        """ Returns a list of `Author`s based on the query.
 
-            If no such `Book`s exist, returns empty list.
+            If no such `Author`s exist, returns empty list.
         """
         raise NotImplementedError
 
     @abc.abstractmethod
-    def search_books_by_release_year(self, release_year: int) -> list[Book]:
-        """ Returns a list of `Book`s who's `release_year` contains the given value.
+    def search_publishers_by_name(self, query: str) -> list[Publisher]:
+        """ Returns a list of `Publisher`s based on the query.
 
-            If no such `Book`s exist, returns empty list.
-        """
-        raise NotImplementedError
-
-    @abc.abstractmethod
-    def search_books_by_publisher_name(self, publisher_name: str) -> list[Book]:
-        """ Returns a list of `Book`s who's `Publisher` name contains the given string
-
-            If no such `Book`s exist, returns empty list.
+            If no such `Publisher`s exist, returns empty list.
         """
         raise NotImplementedError
 
@@ -115,7 +107,6 @@ class AbstractRepository(abc.ABC):
     @abc.abstractmethod
     def get_books_from_release_year(self, release_year: int) -> list[Book]:
         """ Returns a list of `Book`s released in the given `release_year`.
-            Unlike `search_books_by_release_year()`, this will only return exact matches.
 
             If no `Book`s from the given year exist, returns empty list.
         """

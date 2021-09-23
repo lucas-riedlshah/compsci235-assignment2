@@ -8,10 +8,10 @@ def search_books(repo: AbstractRepository, query: str):
 
 
 def search_authors(repo: AbstractRepository, query: str):
-    authors = repo.get_all_authors()
+    authors = repo.search_authors_by_full_name(query)
     return [author_to_dict(book) for book in authors]
 
 
 def search_publishers(repo: AbstractRepository, query: str):
-    publishers = repo.get_all_publishers()
+    publishers = repo.search_publishers_by_name(query)
     return [publisher_to_dict(book) for book in publishers]

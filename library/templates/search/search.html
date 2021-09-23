@@ -1,12 +1,18 @@
 {% extends 'base.html' %} {% block content %}
 <h2>
   Search: "{{ query }}" {{ 'in ' + filter_category.capitalize() if
-  filter_category != ""}}
+  filter_category != ""}} ({{
+      book_result_count + author_result_count + publisher_result_count
+  }} result{{ 
+      's' if book_result_count + author_result_count + publisher_result_count != 1
+  }})
 </h2>
 {% if recommend_all_books_from_year %}
-<a href="{{ url_for('books_bp.books', year=query) }}">See all books from {{ query }}</a>
-{% endif %} {% if books|length > 0 %}
+<a href="{{ url_for('books_bp.books', year=query) }}"
+  >See all books from {{ query }}</a
+>
 <h3>Books</h3>
+{% endif %} {% if books|length > 0 %}
 <div class="list book-list">
   {% for book in books %}
   <a
@@ -16,7 +22,7 @@
   >
     <h3>{{ book.title }}</h3>
   </a>
-  {% endfor %} {% if filter_category == "" %}
+  {% endfor %} {% if filter_category == "" and book_result_count > 4 %}
   <a
     class="list__item book-list__book more-button"
     href="{{ url_for('search_bp.search', q=query, filter='books') }}"
@@ -24,8 +30,11 @@
   >
   {% endif %}
 </div>
-{% endif %} {% if authors|length > 0 %}
+{% else %}
+<p>No results found. Try widening your search.</p>
+{% endif %}
 <h3>Authors</h3>
+{% if authors|length > 0 %}
 <div class="list">
   {% for author in authors %}
   <a
@@ -34,7 +43,7 @@
   >
     <h3>{{ author.full_name }}</h3>
   </a>
-  {% endfor %} {% if filter_category == "" %}
+  {% endfor %} {% if filter_category == "" and author_result_count > 4 %}
   <a
     class="list__item more-button"
     href="{{ url_for('search_bp.search', q=query, filter='authors') }}"
@@ -42,8 +51,11 @@
   >
   {% endif %}
 </div>
-{% endif %} {% if publishers|length > 0 %}
+{% else %}
+<p>No results found. Try widening your search.</p>
+{% endif %}
 <h3>Publishers</h3>
+{% if publishers|length > 0 %}
 <div class="list">
   {% for publisher in publishers %}
   <a
@@ -52,7 +64,7 @@
   >
     <h3>{{ publisher.name }}</h3>
   </a>
-  {% endfor %} {% if filter_category == "" %}
+  {% endfor %} {% if (filter_category == "") and (publisher_result_count > 4) %}
   <a
     class="list__item more-button"
     href="{{ url_for('search_bp.search', q=query, filter='publishers') }}"
@@ -60,6 +72,6 @@
   >
   {% endif %}
 </div>
-{% endif %} {% if books|length + authors|length + publishers|length == 0 %}
-<h3>No results found. Try widening your search.</h3>
+{% else %}
+<p>No results found. Try widening your search.</p>
 {% endif %} {% endblock %}
