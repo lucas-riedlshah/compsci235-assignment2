@@ -43,3 +43,27 @@ def read_books_and_authors():
     reader = BooksJSONReader(path_to_books_file, path_to_authors_file)
     reader.read_json_files()
     return reader.dataset_of_books
+
+class AuthenticationManager:
+    def __init__(self, client):
+        self.__client = client
+
+    def register(self, user_name='takashi', password='ABC123xyz'):
+        return self.__client.post(
+            'register',
+            data={'user_name': user_name, 'password': password}
+        )
+
+    def login(self, user_name='takashi', password='ABC123xyz'):
+        return self.__client.post(
+            'login',
+            data={'user_name': user_name, 'password': password}
+        )
+
+    def logout(self):
+        return self.__client.get('/logout')
+
+
+@pytest.fixture
+def auth(client):
+    return AuthenticationManager(client)
