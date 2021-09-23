@@ -19,8 +19,7 @@
     {% if book.publisher.name != 'N/A' %}
     <p>
       Publisher:
-      <a
-        href="{{ url_for('books_bp.books', publisher=book.publisher.name) }}"
+      <a href="{{ url_for('books_bp.books', publisher=book.publisher.name) }}"
         >{{ book.publisher.name }}</a
       >
     </p>
@@ -37,7 +36,10 @@
     <h3>Reviews</h3>
     {% if 'user_name' in session %}
     <div class="reviews__add-review">
-      <h4>Write a review: {{ '(This will overwrite your current review of this book.)' if session_user_has_reviewed }}</h4>
+      <h4>
+        Write a review: {{ '(This will overwrite your current review of this
+        book.)' if session_user_has_reviewed }}
+      </h4>
       <form method="POST" action="{{ handler_url }}" class="add-review__form">
         {{ review_form.csrf_token }}
         <div class="form__field">
@@ -56,7 +58,8 @@
     {% else %} {% for review in reviews %}
     <div class="review">
       <span class="review__information">
-        Rated <b>{{ review.rating }} / 5</b> by {{ review.user_name }}
+        {% for i in range(review.rating) %}&starf;{% endfor %} by {{
+        review.user_name }}
       </span>
       <span class="review__timestamp">
         {{ review.timestamp.strftime('%d-%m-%Y') }}
