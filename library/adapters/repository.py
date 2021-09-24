@@ -66,30 +66,6 @@ class AbstractRepository(abc.ABC):
         raise NotImplementedError
 
     @abc.abstractmethod
-    def search_books_by_title(self, query: str) -> list[Book]:
-        """ Returns a list of `Book`s based on the query.
-
-            If no such `Book`s exist, returns empty list.
-        """
-        raise NotImplementedError
-
-    @abc.abstractmethod
-    def search_authors_by_full_name(self, query: str) -> list[Author]:
-        """ Returns a list of `Author`s based on the query.
-
-            If no such `Author`s exist, returns empty list.
-        """
-        raise NotImplementedError
-
-    @abc.abstractmethod
-    def search_publishers_by_name(self, query: str) -> list[Publisher]:
-        """ Returns a list of `Publisher`s based on the query.
-
-            If no such `Publisher`s exist, returns empty list.
-        """
-        raise NotImplementedError
-
-    @abc.abstractmethod
     def get_books_by_author(self, author: Author) -> list[Book]:
         """ Returns a list of `Book`s by the given `Author`
 

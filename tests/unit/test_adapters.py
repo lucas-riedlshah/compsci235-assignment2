@@ -63,24 +63,6 @@ class TestMemoryRepository:
         assert isinstance(in_memory_repo.get_all_books(), list)
         assert len(in_memory_repo.get_all_books()) > 0
 
-    def test_search_books_by_title(self, in_memory_repo):
-        assert len(in_memory_repo.search_books_by_title("")) == 0
-        assert len(in_memory_repo.search_books_by_title("  .  ")) == 0
-        assert len(in_memory_repo.search_books_by_title("vol")) == 10
-        assert len(in_memory_repo.search_books_by_title("superman vol. 1")) == 3
-
-    def test_search_authors_by_full_name(self, in_memory_repo):
-        assert len(in_memory_repo.search_authors_by_full_name("")) == 0
-        assert len(in_memory_repo.search_authors_by_full_name("  .  ")) == 0
-        assert len(in_memory_repo.search_authors_by_full_name("Takashi murakami")) == 1
-        assert len(in_memory_repo.search_authors_by_full_name("a.")) == 23
-
-    def test_search_publishers_by_name(self, in_memory_repo):
-        assert len(in_memory_repo.search_publishers_by_name("")) == 0
-        assert len(in_memory_repo.search_publishers_by_name("  .  ")) == 0
-        assert len(in_memory_repo.search_publishers_by_name("a")) == 9
-        assert len(in_memory_repo.search_publishers_by_name("DC Marvel")) == 2
-
     def test_get_books_by_author(self, in_memory_repo):
         author = in_memory_repo.get_all_authors()[0]
         assert len(in_memory_repo.get_books_by_author(author)) == 1
