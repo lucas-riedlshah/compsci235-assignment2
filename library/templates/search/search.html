@@ -1,5 +1,26 @@
 {% extends 'base.html' %} {% block content %}
 
+<!-- Searchbox -->
+<form class="search search--search-page" method="GET" action="search">
+  <input
+    type="text"
+    name="q"
+    title="search-box"
+    placeholder="Search"
+    required
+    oninvalid="this.setCustomValidity('Please enter a search query.')"
+    oninput="this.setCustomValidity('')"
+    class="search__input"
+    value={{ query }}
+  />
+  <input
+    type="submit"
+    value="&rarr;"
+    title="submit-search-button"
+    class="search__button"
+  />
+</form>
+
 <!-- Heading -->
 <h2>
   Search: "{{ query }}" {{ 'in ' + filter_category.capitalize() if
