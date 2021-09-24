@@ -118,3 +118,37 @@ def test_books_with_extra_parameters(client):
     assert b'Jerry Siegel' in response.data
     assert b'1997' in response.data
     assert b'DC Comics' in response.data
+
+def test_authors(client):
+    response = client.get('/authors')
+    assert b'Authors' in response.data
+
+def test_publishers(client):
+    response = client.get('/publishers')
+    assert b'Publishers' in response.data
+
+def test_search_no_query(client):
+    response = client.get('/search')
+    assert b'No results found. Try widening your search.' in response.data
+
+def test_search_single_word(client):
+    response = client.get('/search?q=super')
+    assert b'Superman Archives, Vol. 2' in response.data
+
+def test_search_multiple_words(client):
+    response = client.get('/search?q=DC+Comics+Marvel')
+    assert b'DC Comics' in response.data
+    assert b'Marvel' in response.data
+
+def test_search_filter_category(client):
+    response = client.get('/search?q=vol+2&filter=books')
+    assert b'Search: "vol 2" in Books' in response.data
+    # Authors and Publishers should appear once, in the nav bar, but not in the results as we have filtered for books.
+    assert response.data.count(b'Authors') == 1
+    assert response.data.count(b'Publishers') == 1
+
+    response = client.get('/search?q=re&filter=authors')
+    assert b'Search: "re" in Authors' in response.data
+    
+    response = client.get('/search?q=comics&filter=publishers')
+    assert b'Search: "comics" in Publishers' in response.data
