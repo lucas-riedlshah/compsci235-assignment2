@@ -1,18 +1,24 @@
 {% extends 'base.html' %} {% block content %}
+
+<!-- Heading -->
 <h2>
   Search: "{{ query }}" {{ 'in ' + filter_category.capitalize() if
-  filter_category != ""}} ({{
-      book_result_count + author_result_count + publisher_result_count
-  }} result{{ 
-      's' if book_result_count + author_result_count + publisher_result_count != 1
-  }})
+  filter_category != "" }} ({{ book_result_count + author_result_count +
+  publisher_result_count }} result{{ 's' if book_result_count
+  +author_result_count + publisher_result_count != 1 }})
 </h2>
+
+<!-- Link to books from year if search query is a valid year -->
 {% if recommend_all_books_from_year %}
 <a href="{{ url_for('books_bp.books', year=query) }}"
   >See all books from {{ query }}</a
 >
+{% endif %}
+
+<!-- Book results -->
+{% if filter_category == "" or filter_category == "books" %}
 <h3>Books</h3>
-{% endif %} {% if books|length > 0 %}
+{% if book_result_count > 0 %}
 <div class="list book-list">
   {% for book in books %}
   <a
@@ -32,9 +38,12 @@
 </div>
 {% else %}
 <p>No results found. Try widening your search.</p>
-{% endif %}
+{% endif %} {% endif %}
+
+<!-- Author results -->
+{% if filter_category == "" or filter_category == "authors" %}
 <h3>Authors</h3>
-{% if authors|length > 0 %}
+{% if author_result_count > 0 %}
 <div class="list">
   {% for author in authors %}
   <a
@@ -53,9 +62,12 @@
 </div>
 {% else %}
 <p>No results found. Try widening your search.</p>
-{% endif %}
+{% endif %} {% endif %}
+
+<!-- Publisher results -->
+{% if filter_category == "" or filter_category == "publishers" %}
 <h3>Publishers</h3>
-{% if publishers|length > 0 %}
+{% if publisher_result_count > 0 %}
 <div class="list">
   {% for publisher in publishers %}
   <a
@@ -74,4 +86,4 @@
 </div>
 {% else %}
 <p>No results found. Try widening your search.</p>
-{% endif %} {% endblock %}
+{% endif %} {% endif %} {% endblock %}
