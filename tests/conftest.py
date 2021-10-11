@@ -22,7 +22,8 @@ def in_memory_repo():
 def client():
     my_app = create_app({
         'TESTING': True,
-        'TEST_DATA_PATH': TEST_DATA_PATH, # Not necessary, but will include this, so that the data path for tests can be changed easily.
+        'REPOSITORY': 'memory',
+        'TEST_DATA_PATH': TEST_DATA_PATH,
         'WTF_CSRF_ENABLED': False
     })
 
