@@ -121,7 +121,7 @@ class AbstractRepository(abc.ABC):
 repo_instance: AbstractRepository = None
 
 
-def populate(path: str, repository: AbstractRepository):
+def populate(path: str, repository: AbstractRepository, database_mode=False):
     print("POPULATING...")
     books_file_name = 'comic_books_excerpt.json'
     authors_file_name = 'book_authors_excerpt.json'
@@ -133,8 +133,9 @@ def populate(path: str, repository: AbstractRepository):
 
     for book in tqdm(reader.dataset_of_books):
         repository.add_book(book)
-        if book.publisher.name != "N/A":
-            repository.add_publisher(book.publisher)
-        for author in book.authors:
-            repository.add_author(author)
+        if not database_mode:
+            if book.publisher.name != "N/A":
+                repository.add_publisher(book.publisher)
+            for author in book.authors:
+                repository.add_author(author)
     print("FINSIHED POPULATING.")
