@@ -1,6 +1,8 @@
 import abc
 from datetime import date
 
+from tqdm import tqdm
+
 from .jsondatareader import BooksJSONReader
 from library.domain import Publisher, Author, Book, Review, User
 
@@ -120,6 +122,7 @@ repo_instance: AbstractRepository = None
 
 
 def populate(path: str, repository: AbstractRepository):
+    print("POPULATING...")
     books_file_name = 'comic_books_excerpt.json'
     authors_file_name = 'book_authors_excerpt.json'
     path_to_books_file = str(path / books_file_name)
@@ -128,9 +131,10 @@ def populate(path: str, repository: AbstractRepository):
 
     reader.read_json_files()
 
-    for book in reader.dataset_of_books:
+    for book in tqdm(reader.dataset_of_books):
         repository.add_book(book)
         if book.publisher.name != "N/A":
             repository.add_publisher(book.publisher)
         for author in book.authors:
             repository.add_author(author)
+    print("FINSIHED POPULATING.")
