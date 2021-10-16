@@ -136,3 +136,4 @@ dmypy.json
 
 # SQLAlchemy DB
 library.db
+library-test.db
