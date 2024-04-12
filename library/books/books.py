@@ -2,7 +2,7 @@ from flask import Blueprint, request, render_template, url_for, redirect, sessio
 from flask_wtf import FlaskForm
 from wtforms import SubmitField, TextAreaField
 from wtforms.validators import DataRequired
-from wtforms.fields.html5 import IntegerField
+from wtforms.fields import IntegerField
 
 from .services import *
 from library.adapters.repository import repo_instance as repo
