@@ -1,21 +1,12 @@
-# COMPSCI 235 Starter Repository for Assignment 2
-
+# COMPSCI 235 Assignment 2
 
 ## Description
 
-This repository contains an implementation of the domain model from Assignment 1. 
-It contains unit tests which can be run through pytest. 
-It also contains a simple Flask application that renders content of a Book object instance from our domain model on a blank html page.
-
-Please note that this sample implementation from Assignment 1 contains a more comprehensive superset of tests compared with what we had as hidden tests on Coderunner. 
-Your domain model implementation may have to be extended to meet all test cases in the sample implementation, but you may also decide to remove or modify test cases as it suits you. 
-From here on you can choose if you want to use the provided domain model or your implementation, just make sure your chosen set of test cases always work with your implementation.
-
+This project was created during my time at the University of Auckland. I have shared it here to demonstrate some of my knowledge with Python and Flask.
 
 ## Python version
 
 Please use Python version 3.9 or newer versions for development. Some files use type hinting of `list` without importing typing.List, as in 3.9 this is no longer required. Also, some of the depending libraries of our web application do not support Python versions below 3.6!
-
 
 ## Installation
 
@@ -27,15 +18,9 @@ $ venv\Scripts\activate
 $ pip install -r requirements.txt
 ```
 
-When using PyCharm for requirements installation, set the virtual environment using 'File'->'Settings' and select your project from the left menu. Select 'Project Interpreter', click on the gearwheel button and select 'Add'. Click the 'Existing environment' radio button to select the virtual environment. 
-
-
 ## Testing with the pytest unit tests
 
-After you have configured pytest as the testing tool for PyCharm (File - Settings - Tools - Python Integrated Tools - Testing), you can then run tests from within PyCharm by right-clicking the tests folder and selecting "Run pytest in tests".
-
-Alternatively, from a terminal in the root folder of the project, you can also call 'python -m pytest tests' to run all the tests. PyCharm also provides a built-in terminal, which uses the configured virtual environment. 
-
+Run `python -m pytest tests` to run all the tests.
 
 ## Execution of the web application
 
