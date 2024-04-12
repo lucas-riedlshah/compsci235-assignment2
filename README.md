@@ -2,7 +2,7 @@
 
 ## Description
 
-This project was created during my time at the University of Auckland. I have shared it here to demonstrate some of my knowledge with Python and Flask.
+This project was created during my time at the University of Auckland. I have shared it here to demonstrate some of my knowledge with Python, SQL and Flask.
 
 ## Python version
 
