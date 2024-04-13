@@ -7,18 +7,18 @@ from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker, clear_mappers
 from sqlalchemy.pool import NullPool
 
+from utils import get_project_root
 import library.adapters.repository as repository
 from library.adapters.repository import populate
 from library.adapters.memory_repository import MemoryRepository
 from library.adapters.database_repository import SqlAlchemyRepository
 from library.adapters.orm import metadata, map_model_to_tables
 
-
 def create_app(test_config=None):
     app = Flask(__name__)
 
     app.config.from_object('config.Config')
-    data_path = Path('library') / 'adapters' / 'data'
+    data_path = get_project_root() / 'library' / 'adapters' / 'data'
 
     if test_config is not None:
         app.config.from_mapping(test_config)

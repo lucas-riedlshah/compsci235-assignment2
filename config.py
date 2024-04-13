@@ -2,8 +2,10 @@
 from os import environ
 from dotenv import load_dotenv
 
+from utils import get_project_root
+
 # Load environment variables from file .env, stored in this directory.
-load_dotenv()
+load_dotenv(get_project_root() / '.env')
 
 class Config:
     """Set Flask configuration from .env file."""
